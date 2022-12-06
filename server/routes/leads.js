@@ -21,7 +21,7 @@ router.put('/update-status', (req, res, next) => {
   res.json('leads/update-status');
 });
 
-router.put('/lead-send', (req, res, next) => {
+router.patch('/lead-send', (req, res, next) => {
   res.json('leads/lead-send');
 });
 
