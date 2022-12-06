@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   leads.init({
     lead_type_id: DataTypes.INTEGER,
     company_id: DataTypes.INTEGER,
+    lead_name: DataTypes.STRING,
+    lead_phone: DataTypes.STRING,
     status_id: DataTypes.INTEGER,
     comment: DataTypes.TEXT,
   }, {

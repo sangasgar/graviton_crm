@@ -89,6 +89,8 @@ module.exports = {
     },
     ], {});
     await queryInterface.bulkInsert('Leads', [{
+      lead_name: 'Иван',
+      lead_phone: '79251111111',
       lead_type_id: 1,
       company_id: 1,
       status_id: 1,
@@ -97,6 +99,8 @@ module.exports = {
       updatedAt: new Date(),
     },
     {
+      lead_name: 'Виктор',
+      lead_phone: '79251111111',
       lead_type_id: 2,
       company_id: 2,
       status_id: 2,
