@@ -9,8 +9,8 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
-import getAllLeadsThunk from '../../redux/thunks/allLeadsThunk';
-import OneLead from './OneLead';
+import getAllCompanyThunk from '../../redux/thunks/getAllCompanyThunk';
+import OneCompany from './OneCompany';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -24,13 +24,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 
-export default function Leads() {
+export default function Company() {
   const dispatch = useDispatch()
-    const allLeads = useSelector((store) => store.allLeads);
+    const allCompany = useSelector((store) => store.allCompany);
     useEffect(()=>{
-    dispatch(getAllLeadsThunk())
+    dispatch(getAllCompanyThunk())
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log(allLeads);
+    console.log(allCompany);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
@@ -42,13 +42,13 @@ export default function Leads() {
             <StyledTableCell>id</StyledTableCell>
             <StyledTableCell align="right">Name</StyledTableCell>
             <StyledTableCell align="right">Contact</StyledTableCell>
-            <StyledTableCell align="right">Status</StyledTableCell>
-            <StyledTableCell align="right">Company</StyledTableCell>
+            <StyledTableCell align="right">Balance</StyledTableCell>
+            <StyledTableCell align="right">Comment</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {allLeads.map((row, index) => (
-            <OneLead row={row} key={index * row?.id}/>
+          {allCompany.map((row, index) => (
+            <OneCompany row={row} key={index * row?.id}/>
           ))}
         </TableBody>
       </Table>

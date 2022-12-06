@@ -1,5 +1,3 @@
-import Status from './Status'
-import Company from './Company'
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -23,7 +21,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
       border: 0,
     },
   }));
-export default function OneLead ({row}) {
+export default function OneCompany ({row}) {
     return (
         <StyledTableRow>
               <StyledTableCell component="th" scope="row">
@@ -31,8 +29,8 @@ export default function OneLead ({row}) {
               </StyledTableCell>
               <StyledTableCell align="right">{row.name}</StyledTableCell>
               <StyledTableCell align="right">{row.contact}</StyledTableCell>
-              <StyledTableCell align="right"><Status/></StyledTableCell>
-              <StyledTableCell align="right"><Company/></StyledTableCell>
+              <StyledTableCell align="right">{row.balance}</StyledTableCell>
+              <StyledTableCell align="right">{row.comment}</StyledTableCell>
             </StyledTableRow>
     )
 }

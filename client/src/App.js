@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import Leads from './components/Leads/Leads';
 import Navbar from './components/Navbar'
 import { Container } from '@mui/system';
+import Company from './components/Company/Company';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Container>
         <Routes>
           <Route path="/leads" element={<Leads/>}/>
+          <Route path="/company" element={<Company/>}/>
         </Routes>
         </Container>
       </div>

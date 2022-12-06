@@ -1,11 +1,11 @@
-import getAllLeadsAC from '../actions/allLeadsAction';
+import getAllCompanyAC from '../actions/getAllCompanyAC';
 
-const getAllLeadsThunk = () => async (dispatch) => {
+const getAllCompanyThunk = () => async (dispatch) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_HOST}/leads`);
+    const response = await fetch(`${process.env.REACT_APP_HOST}/company`);
     const data = await response.json();
     if (response.ok) {
-      dispatch(getAllLeadsAC(data));
+      dispatch(getAllCompanyAC(data));
     } else {
       // eslint-disable-next-line no-alert
       alert('Что-то пошло не так!');
@@ -16,4 +16,4 @@ const getAllLeadsThunk = () => async (dispatch) => {
   }
 };
 
-export default getAllLeadsThunk;
+export default getAllCompanyThunk;
