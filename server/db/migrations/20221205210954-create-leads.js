@@ -8,6 +8,12 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      lead_name: {
+        type: Sequelize.STRING,
+      },
+      lead_phone: {
+        type: Sequelize.STRING,
+      },
       lead_type_id: {
         allowNull: false,
         references: {
