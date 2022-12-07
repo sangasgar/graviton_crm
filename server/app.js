@@ -11,6 +11,7 @@ const indexRouter = require('./routes/index');
 const leadsRouter = require('./routes/leads');
 const companyRouter = require('./routes/companies');
 const usersRouter = require('./routes/users');
+const paymentRouter = require('./routes/payment');
 
 const testBD = async () => {
   try {
@@ -33,6 +34,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/leads', leadsRouter);
 app.use('/companies', companyRouter);
+app.use('/payments', paymentRouter);
 app.listen(PORT, () => {
   console.log('Сервер запущен на порту ', PORT);
 });

@@ -23,26 +23,32 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date(),
     }], {});
-    await queryInterface.bulkInsert('Statuses', [{
-      name: 'Передан',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'В работе',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'Возврат',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      name: 'Не актуально',
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    }], {});
+    await queryInterface.bulkInsert('Statuses', [
+      {
+        name: 'Активный',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Передан',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'В работе',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Возврат',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: 'Не актуально',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }], {});
     await queryInterface.bulkInsert('Leads_types', [{
       name: 'Стандарт',
       price: 200.00,
@@ -59,6 +65,7 @@ module.exports = {
     await queryInterface.bulkInsert('Companies', [{
       name: 'Компания 1',
       phone: '+79261119990',
+      email: 'sangas@yandex.ru',
       balance: 100000.00,
       comment: 'Комментарий компания 1',
       createdAt: new Date(),
@@ -67,6 +74,7 @@ module.exports = {
     {
       name: 'Компания 2',
       phone: '+79261119990',
+      email: 'sangas1@yandex.ru',
       balance: 150000.00,
       comment: 'Комментарий компания 2',
       createdAt: new Date(),

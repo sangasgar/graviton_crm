@@ -19,6 +19,7 @@ module.exports = {
           model: 'Companies',
           key: 'id',
         },
+        onDelete: 'CASCADE',
       },
       comment: {
         type: Sequelize.STRING,
