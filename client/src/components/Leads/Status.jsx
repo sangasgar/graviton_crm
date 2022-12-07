@@ -11,15 +11,14 @@ export default function Status() {
 
   const handleChange = (event) => {
     setStatus(event.target.value);
-    console.log(event.target.value);
   };
 
   const statuts = ['активный', 'передан', 'возвращен', 'в работе', 'неактивный']
 
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 100 }}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Status</InputLabel>
+        <InputLabel id="demo-simple-select-label">{statuts[0]}</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"

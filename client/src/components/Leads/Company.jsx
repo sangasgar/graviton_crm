@@ -5,25 +5,25 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-export default function Company() {
-  const [age, setAge] = React.useState('');
-
+export default function Company({row}) {
+  const [company, setCompany] = React.useState('wq');
+  
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setCompany(event.target.value);
   };
-  const company = ['Spartak', 'Zenit', 'Volga', 'Uralan']
+  const companys = ['Spartak', 'Zenit', 'Volga', 'Uralan']
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: 100}}>
       <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Company</InputLabel>
+        <InputLabel>company</InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
-          label="Age"
+          value={company}
+          label="company"
           onChange={handleChange}
         >
-            {company.map((el, id) => <MenuItem value={el}>{el}</MenuItem> )}
+            {companys.map((el, index) =>  <MenuItem value={el}>{el}</MenuItem>)}
         </Select>
       </FormControl>
     </Box>

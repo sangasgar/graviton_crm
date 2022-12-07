@@ -19,7 +19,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 16,
   },
 }));
 
@@ -39,11 +39,11 @@ export default function Company() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>id</StyledTableCell>
-            <StyledTableCell align="right">Name</StyledTableCell>
-            <StyledTableCell align="right">Contact</StyledTableCell>
-            <StyledTableCell align="right">Balance</StyledTableCell>
-            <StyledTableCell align="right">Comment</StyledTableCell>
+            <StyledTableCell style={{backgroundColor: "grey"}}>id</StyledTableCell>
+            <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Name</StyledTableCell>
+            <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Contact</StyledTableCell>
+            <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Balance</StyledTableCell>
+            <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Comment</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>

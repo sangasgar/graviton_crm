@@ -22,20 +22,19 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     color: theme.palette.common.white,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 16,
   },
 }));
 export default function CustomizedTables({row}) {
-
   return (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
                 {row.id}
-              </StyledTableCell>
+              </StyledTableCell >
               <StyledTableCell align="right"><Link to={`/leads/${row.id}`} >{row.name}</Link></StyledTableCell>
               <StyledTableCell align="right">{row.contact}</StyledTableCell>
               <StyledTableCell align="right"><Status/></StyledTableCell>
-              <StyledTableCell align="right"><Company/></StyledTableCell>
+              <StyledTableCell align="right"><Company row={row}/></StyledTableCell>
             </StyledTableRow>
             
           )}

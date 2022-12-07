@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 
 
-const navItems = [{'name': 'Лиды', 'href': '/leads'}, {'name': 'Компании', 'href': '/company'}, {'name': 'Личный кабинет', 'href': '/lk'}];
+const navItems = [{'name': 'Лиды', 'href': '/leads'}, {'name': 'Компании', 'href': '/company'}, {'name': "Личный кабинет", 'href': '/lk'}];
 
 
 function Navbar() {
@@ -15,7 +15,7 @@ function Navbar() {
   return (
       <AppBar component="nav" style={{backgroundColor: "grey"}}>
         <Toolbar>
-        <img style={{width: '40px', paddingRight: '3px'}} src="../../2022-12-05 22.55.12.jpg" alt="" srcset="" />
+        <img style={{width: '40px', paddingRight: '10px'}} src="../../2022-12-05 22.55.12.jpg" alt="" srcset="" />
           <Typography
             variant="h6"
             component="div"
@@ -23,10 +23,10 @@ function Navbar() {
           >
             Graviton CRM
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'flex',  } }}>
+          <Box sx={{ display: { xs: 'none', sm: 'flex'} }} style={{display: 'flex', justifyContent: 'center'}}>
             {navItems.map((item) => (
               <Link to={item.href} key={item} style={{
-                 fontSize: '20px', letterSpacing: '2px', color: 'white', margin: '3px'
+                 fontSize: '20px', letterSpacing: '2px', color: 'white', margin: '3px' 
               }}>
                 {item.name}
               </Link>

@@ -3,7 +3,7 @@ const allLeadsReducer = (state = [], action) => {
     switch (type) {
       case 'GET_LEADS':
         return payload;
-      case 'DELETE_PRODUCT':
+      case 'DELETE_LEAD':
         return state.filter((el) => el.id !== payload);
       default:
         return state;

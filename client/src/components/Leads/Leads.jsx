@@ -42,7 +42,7 @@ function Leads () {
               <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Company</StyledTableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody >
           {allLeads.map((row, index) => (
             <OneLead row={row} key={index * row?.id}/>
           ))}
