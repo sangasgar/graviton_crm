@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     comment: DataTypes.STRING,
   }, {
     sequelize,
-    modelName: 'payments',
+    modelName: 'Payments',
   });
   return payments;
 };

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
   }, {
     sequelize,
-    modelName: 'statuses',
+    modelName: 'Statuses',
   });
   return statuses;
 };

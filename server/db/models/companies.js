@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     comment: DataTypes.TEXT,
   }, {
     sequelize,
-    modelName: 'companies',
+    modelName: 'Companies',
   });
   return companies;
 };
