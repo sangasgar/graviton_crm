@@ -41,6 +41,7 @@ function Leads () {
               <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Contact</StyledTableCell>
               <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Status</StyledTableCell>
               <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Company</StyledTableCell>
+              <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Comment</StyledTableCell>
             </TableRow>
           </TableHead>
           <TableBody >

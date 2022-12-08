@@ -2,7 +2,7 @@ import getDescriptionCompanyAC from '../actions/getDescriptionCompanyAC';
 
 const getDescriptionCompanyThunk = (id) => async (dispatch) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_HOST}/company/${id}`);
+    const response = await fetch(`${process.env.REACT_APP_HOST}/companies/${id}`);
     const data = await response.json();
     if (response.ok) {
       dispatch(getDescriptionCompanyAC(data));

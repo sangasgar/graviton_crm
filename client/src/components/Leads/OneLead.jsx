@@ -1,6 +1,4 @@
 import * as React from 'react';
-import Status from './Status'
-import Company from './Company'
 import { Link } from "react-router-dom";
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
@@ -33,8 +31,9 @@ export default function CustomizedTables({row}) {
               </StyledTableCell >
               <StyledTableCell align="right"><Link to={`/leads/${row.id}`} >{row.lead_name}</Link></StyledTableCell>
               <StyledTableCell align="right">{row.lead_phone}</StyledTableCell>
-              <StyledTableCell align="right"><Status/></StyledTableCell>
-              <StyledTableCell align="right"><Company status={row.status_id} row={row}/></StyledTableCell>
+              <StyledTableCell align="right">{row.Status?.name}</StyledTableCell>
+              <StyledTableCell align="right">{row.Company?.name}</StyledTableCell>
+              <StyledTableCell align="right">{row?.comment}</StyledTableCell>
             </StyledTableRow>
             
           )}

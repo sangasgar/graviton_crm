@@ -42,6 +42,7 @@ export default function Company() {
             <StyledTableCell style={{backgroundColor: "grey"}}>id</StyledTableCell>
             <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Name</StyledTableCell>
             <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Contact</StyledTableCell>
+            <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Email</StyledTableCell>
             <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Balance</StyledTableCell>
             <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Comment</StyledTableCell>
           </TableRow>

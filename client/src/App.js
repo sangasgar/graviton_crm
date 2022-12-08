@@ -5,6 +5,7 @@ import { Container } from '@mui/system';
 import Company from './components/Company/Company';
 import DescriptionLead from './components/Leads/DescriptionLead';
 import DescriptionCompany from './components/Company/DescriptionCompany';
+import MainAdmin from './components/Admin/MainAdmin'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path='/company' element={<Company/>}/>
           <Route path="/leads/:id" element={<DescriptionLead/>} />
           <Route path="/company/:id" element={<DescriptionCompany/>} />
+          <Route path="/lk" element={<MainAdmin/>} />
         </Routes>
         </Container>
       </div>

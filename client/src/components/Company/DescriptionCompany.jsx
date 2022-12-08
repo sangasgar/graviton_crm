@@ -32,9 +32,11 @@ const useStyles = makeStyles({
 export default function DescriptionCompany() {
     const dispatch = useDispatch()
     const {id} = useParams()
-    const dataCompany = useSelector((store) => store.DescriptionCompany);
+    const dataCompany = useSelector((store) => store.descriptionCompany);
+    console.log(dataCompany);
     const navigate = useNavigate();
-    const deleteHandler = (id) => {
+    
+  const deleteHandler = (id) => {
         dispatch(deleteCompanyThunk(id))
         navigate('/company')
     }
@@ -49,20 +51,23 @@ export default function DescriptionCompany() {
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          {dataCompany?.name}
+          Название: {dataCompany?.name}
         </Typography>
         <Typography variant="h5" component="h2">
-          {dataCompany?.phone}
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          {dataCompany?.balance}
+          Телефон: {dataCompany?.phone}
         </Typography>
         <Typography variant="body2" component="p">
-          {dataCompany?.comment}
+          Email: {dataCompany?.email}
+        </Typography>
+        <Typography className={classes.pos} color="textSecondary">
+          Баланс: {dataCompany?.balance}
+        </Typography>
+        <Typography variant="body2" component="p">
+          Комментарий: {dataCompany?.comment}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button style={{border: '1px solid red'}} size="small" onClick={()=> deleteHandler()}>Удалить</Button>
+        <Button style={{border: '1px solid red'}} size="small" onClick={()=> deleteHandler(id)}>Удалить</Button>
       </CardActions>
     </Card>
     </div>
