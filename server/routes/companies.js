@@ -1,5 +1,6 @@
 const express = require('express');
 const { Companies } = require('../db/models');
+const { Payments } = require('../db/models');
 
 const router = express.Router();
 
@@ -13,6 +14,20 @@ router.get('/all', async (req, res, next) => {
       order: [
         ['updatedAt', 'DESC'],
       ],
+      include: Payments,
+    });
+    const companiesJson = JSON.parse(JSON.stringify(companies));
+    return res.json(companiesJson);
+  } catch (error) {
+    return res.json({ error: 'Ошибка соеднинения' });
+  }
+});
+router.get('/:id', async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const companies = await Companies.findOne({
+      where: { id },
+      include: Payments,
     });
     const companiesJson = JSON.parse(JSON.stringify(companies));
     return res.json(companiesJson);
@@ -42,9 +57,9 @@ router.post('/add', async (req, res, next) => {
   }
 });
 
-router.delete('/delete-company', async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
     if (id) {
       const companies = await Companies.destroy({ where: { id } });
       const companiesJsonDeleteStatus = companies === 1;
