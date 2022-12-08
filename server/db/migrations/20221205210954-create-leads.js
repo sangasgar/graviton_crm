@@ -15,11 +15,11 @@ module.exports = {
         type: Sequelize.STRING,
       },
       lead_type_id: {
-        allowNull: false,
         references: {
           model: 'Leads_types',
           key: 'id',
         },
+        onDelete: 'SET NULL',
         type: Sequelize.INTEGER,
       },
       company_id: {
@@ -27,14 +27,15 @@ module.exports = {
           model: 'Companies',
           key: 'id',
         },
+        onDelete: 'SET NULL',
         type: Sequelize.INTEGER,
       },
       status_id: {
-        allowNull: false,
         references: {
           model: 'Statuses',
           key: 'id',
         },
+        onDelete: 'SET NULL',
         type: Sequelize.INTEGER,
       },
       comment: {

@@ -9,7 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate({ Companies }) {
+      this.belongsTo(Companies, { foreignKey: 'company_id' }, { onDelete: 'cascade' });
       // define association here
     }
   }
@@ -19,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
     comment: DataTypes.STRING,
   }, {
     sequelize,
-    modelName: 'payments',
+    modelName: 'Payments',
   });
   return payments;
 };

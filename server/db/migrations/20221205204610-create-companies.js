@@ -15,6 +15,11 @@ module.exports = {
       phone: {
         type: Sequelize.STRING,
       },
+      email: {
+        allowNull: false,
+        unique: true,
+        type: Sequelize.STRING,
+      },
       balance: {
         type: Sequelize.FLOAT,
       },
