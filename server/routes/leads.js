@@ -1,6 +1,9 @@
 /* eslint-disable camelcase */
 const express = require('express');
 const { Leads } = require('../db/models');
+const { Leads_type } = require('../db/models');
+const { Companies } = require('../db/models');
+const { Statuses } = require('../db/models');
 
 const router = express.Router();
 
@@ -14,6 +17,9 @@ router.get('/all', async (req, res, next) => {
       order: [
         ['updatedAt', 'DESC'],
       ],
+      include: [Leads_type,
+        Companies,
+        Statuses],
     });
     const leadsJson = JSON.parse(JSON.stringify(leads));
     return res.json(leadsJson);
@@ -44,19 +50,35 @@ router.post('/add', async (req, res, next) => {
   }
 });
 
-router.delete('/delete-lead', async (req, res, next) => {
-  try {
-    const { id } = req.body;
-    if (id) {
-      const leadDelete = await Leads.destroy({ where: { id } });
-      const leadsJsonDeleteStatus = leadDelete === 1;
-      return res.json({ leadsDeleteStatus: leadsJsonDeleteStatus });
+router.route('/:id')
+  .get(async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const leads = await Leads.findOne({
+        where: { id },
+        include: [Leads_type,
+          Companies,
+          Statuses],
+      });
+      const leadsJson = JSON.parse(JSON.stringify(leads));
+      return res.json(leadsJson);
+    } catch (error) {
+      return res.json({ error: 'Ошибка соеднинения' });
     }
-    return res.json({ leadsDeleteStatus: false });
-  } catch (error) {
-    return res.json({ createLeadStatus: false });
-  }
-});
+  })
+  .delete(async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      if (id) {
+        const leadDelete = await Leads.destroy({ where: { id } });
+        const leadsJsonDeleteStatus = leadDelete === 1;
+        return res.json({ leadsDeleteStatus: leadsJsonDeleteStatus });
+      }
+      return res.json({ leadsDeleteStatus: false });
+    } catch (error) {
+      return res.json({ createLeadStatus: false });
+    }
+  });
 
 router.patch('/update-status', async (req, res, next) => {
   try {
