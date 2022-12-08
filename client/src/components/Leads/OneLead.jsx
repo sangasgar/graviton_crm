@@ -31,10 +31,10 @@ export default function CustomizedTables({row}) {
               <StyledTableCell component="th" scope="row">
                 {row.id}
               </StyledTableCell >
-              <StyledTableCell align="right"><Link to={`/leads/${row.id}`} >{row.name}</Link></StyledTableCell>
-              <StyledTableCell align="right">{row.contact}</StyledTableCell>
+              <StyledTableCell align="right"><Link to={`/leads/${row.id}`} >{row.lead_name}</Link></StyledTableCell>
+              <StyledTableCell align="right">{row.lead_phone}</StyledTableCell>
               <StyledTableCell align="right"><Status/></StyledTableCell>
-              <StyledTableCell align="right"><Company row={row}/></StyledTableCell>
+              <StyledTableCell align="right"><Company status={row.status_id} row={row}/></StyledTableCell>
             </StyledTableRow>
             
           )}

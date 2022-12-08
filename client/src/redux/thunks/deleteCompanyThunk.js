@@ -2,7 +2,7 @@ import deleteCompanyAC from '../actions/deleteCompanyAC.js';
 
 const deleteCompanyThunk = (id) => async (dispatch) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_HOST}/company/${id}`, {
+    const response = await fetch(`${process.env.REACT_APP_HOST}companies/delete/${id}`, {
         method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
         },);
     if (response.ok) {

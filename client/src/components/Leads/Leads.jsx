@@ -25,6 +25,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 function Leads () {
     const dispatch = useDispatch()
     const allLeads = useSelector((store) => store.allLeads);
+    console.log(allLeads);
     useEffect(()=>{
     dispatch(getAllLeadsThunk())
     // eslint-disable-next-line react-hooks/exhaustive-deps
