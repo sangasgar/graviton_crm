@@ -81,7 +81,26 @@ router.route('/:id')
       return res.json({ createLeadStatus: false });
     }
   });
-
+router.patch('/:id/update-status', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { status_id } = req.body;
+    if (id && status_id) {
+      const leadFind = JSON.parse(JSON.stringify(await Leads.findOne({ where: { id }, include: [Leads_type, Companies] })));
+      if (leadFind.status_id === 2 && leadFind.company_id !== null) {
+        const company = await Companies.update({ balance: leadFind.Company.balance + leadFind.Leads_type.price }, { where: { id: leadFind.company_id } });
+        const leads = await Leads.update({ status_id, company_id: null }, { where: { id } });
+        const updateCompanyBalance = company[0] === 1;
+        const resetLeadStatus = leads[0] === 1;
+        return res.json({ updateCompanyBalance, resetLeadStatus });
+      }
+      return res.json({ updateCompanyBalance: false, resetLeadStatus: false });
+    }
+    return res.json({ updateCompanyBalance: false, resetLeadStatus: false });
+  } catch (error) {
+    return res.json({ updateCompanyBalance: false, resetLeadStatus: false });
+  }
+});
 router.patch('/lead-send', async (req, res, next) => {
   try {
     const {
