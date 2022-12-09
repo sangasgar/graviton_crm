@@ -13,7 +13,7 @@ const navItems = [{'name': 'Лиды', 'href': '/leads'}, {'name': 'Компан
 function Navbar() {
   
   return (
-      <AppBar component="nav" style={{backgroundColor: "grey"}}>
+      <AppBar component="nav" style={{backgroundColor: "#0dd6c9", color: 'black', fontFamily: 'Arial Black'}}>
         <Toolbar>
         <img style={{width: '40px', paddingRight: '10px'}} src="../../2022-12-05 22.55.12.jpg" alt="" srcset="" />
           <Typography

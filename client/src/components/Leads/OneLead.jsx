@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import { styled } from '@mui/material/styles';
 import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button';
+import SendCompanyModal from './SendCompanyModal';
 
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -24,6 +26,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 export default function CustomizedTables({row}) {
+  const [sendCompanyVisible, setSendCompanyVisible] = React.useState(false)
   return (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
@@ -31,9 +34,15 @@ export default function CustomizedTables({row}) {
               </StyledTableCell >
               <StyledTableCell align="right"><Link to={`/leads/${row.id}`} >{row.lead_name}</Link></StyledTableCell>
               <StyledTableCell align="right">{row.lead_phone}</StyledTableCell>
-              <StyledTableCell align="right">{row.Status?.name}</StyledTableCell>
-              <StyledTableCell align="right">{row.Company?.name}</StyledTableCell>
               <StyledTableCell align="right">{row?.comment}</StyledTableCell>
+              <StyledTableCell align="right">{row.Status?.name}</StyledTableCell>
+              <StyledTableCell align="right">
+              {row.Status.name === 'Активный' ? (<Button color="success" variant="contained" onClick={() => setSendCompanyVisible(true)}>Передать в компанию</Button>) :
+              (<Button variant="contained" disabled>
+                {row?.Company.name}
+               </Button>)}
+              </StyledTableCell>
+              <SendCompanyModal idLead={row?.id} show={sendCompanyVisible} onHide={() => setSendCompanyVisible(false)} />
             </StyledTableRow>
             
           )}
