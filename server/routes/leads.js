@@ -1,9 +1,11 @@
+/* eslint-disable max-len */
 /* eslint-disable camelcase */
 const express = require('express');
 const { Leads } = require('../db/models');
 const { Leads_type } = require('../db/models');
 const { Companies } = require('../db/models');
 const { Statuses } = require('../db/models');
+const db = require('../db/models');
 
 const router = express.Router();
 
@@ -80,35 +82,38 @@ router.route('/:id')
     }
   });
 
-router.patch('/update-status', async (req, res, next) => {
-  try {
-    const {
-      id, status_id,
-    } = req.body;
-    if (id && status_id) {
-      const leads = await Leads.update({ status_id }, { where: { id } });
-      const leadsJsonUpdateStatus = leads[0] === 1;
-      return res.json({ updateLeadStatus: leadsJsonUpdateStatus });
-    }
-    return res.json({ updateLeadStatus: false });
-  } catch (error) {
-    return res.json({ createLeadStatus: false });
-  }
-});
-
 router.patch('/lead-send', async (req, res, next) => {
   try {
     const {
       id, company_id,
     } = req.body;
     if (id && company_id) {
-      const leads = await Leads.update({ company_id }, { where: { id } });
-      const leadsJsonCompanyUpdateStatus = leads[0] === 1;
-      return res.json({ updateLeadCompanyStatus: leadsJsonCompanyUpdateStatus });
+      const lead = JSON.parse(JSON.stringify(await Leads.findOne({
+        where: { id },
+        include: [Leads_type,
+          Statuses,
+          Companies],
+      })));
+      const companySearch = JSON.parse(JSON.stringify(await Companies.findOne({ id: company_id })));
+      const balanceUpdate = companySearch.balance - lead.Leads_type.price;
+      if (lead.Status.id !== 2 && lead.Company === null) {
+        const t = await db.sequelize.transaction();
+        const leads = await Leads.update({ company_id, status_id: 2 }, { where: { id } }, { transaction: t });
+        const company = await Companies.update(
+          { balance: balanceUpdate },
+          { where: { id: company_id } },
+          { transaction: t },
+        );
+        await t.commit();
+        const leadsUpdateStatus = leads[0] === 1;
+        const companyUpdateBalance = company[0] === 1;
+        return res.json({ updateLeadStatus: leadsUpdateStatus, companyUpdateBalance });
+      }
+      return res.json({ updateLeadStatus: false, companyUpdateBalance: false });
     }
-    return res.json({ updateLeadCompanyStatus: false });
+    return res.json({ updateLeadStatus: false, companyUpdateBalance: false });
   } catch (error) {
-    return res.json({ createLeadStatus: false });
+    return res.json({ updateLeadStatus: false, companyUpdateBalance: false });
   }
 });
 
