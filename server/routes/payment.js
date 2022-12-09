@@ -21,9 +21,9 @@ router.post('/add', async (req, res, next) => {
       const t = await db.sequelize.transaction();
       const payment = await Payments.create({ company_id, price: payment_sum, comment }, { transaction: t });
       const company = JSON.parse(JSON.stringify(await Companies.findOne({ where: { id: company_id } })));
-      const balanceUpdate = company.balance + payment_sum;
+      const balanceUpdate = company.balance + Number(payment_sum);
       const companyUpdate = await Companies.update({ id: company_id, balance: balanceUpdate }, { where: { id: company.id } }, { transaction: t });
-      const paymentJsonCreateStatus = JSON.parse(JSON.stringify(payment)).price === payment_sum;
+      const paymentJsonCreateStatus = JSON.parse(JSON.stringify(payment)).price === Number(payment_sum);
       const companyUpdateBalance = companyUpdate[0] === 1;
       t.commit();
       return res.json({ createPaymentStatus: paymentJsonCreateStatus, companyUpdateBalance });
