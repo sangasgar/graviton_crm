@@ -35,6 +35,7 @@ router.get('/:id', async (req, res, next) => {
     return res.json({ error: 'Ошибка соеднинения' });
   }
 });
+
 router.post('/add', async (req, res, next) => {
   try {
     const {
