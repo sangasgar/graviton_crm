@@ -6,7 +6,7 @@ const cors = require('cors');
 const db = require('./db/models');
 require('dotenv').config();
 
-const  PORT  = process.env.PORT || 3010;
+const PORT = process.env.PORT || 3010;
 const indexRouter = require('./routes/index');
 const leadsRouter = require('./routes/leads');
 const companyRouter = require('./routes/companies');

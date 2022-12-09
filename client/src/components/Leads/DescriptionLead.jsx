@@ -50,23 +50,23 @@ export default function DescriptionLead() {
     <Card className={classes.root} variant="outlined">
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          {dataLead.name}
+          Название: {dataLead?.lead_name}
         </Typography>
         <Typography variant="h5" component="h2">
-          {dataLead.type}
+          Тип лида: {dataLead?.Leads_type?.name}
         </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          {dataLead.company}
-        </Typography>
-        <Typography variant="body2" component="p">
-          {dataLead.status}
+        <Typography className={classes?.pos} color="textSecondary">
+          Какой компании передан: {dataLead?.Company?.name}
         </Typography>
         <Typography variant="body2" component="p">
-          {dataLead.comment}
+          Статус: {dataLead?.Status?.name}
+        </Typography>
+        <Typography variant="body2" component="p">
+          Комментарий: {dataLead?.comment}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button style={{border: '1px solid red'}} size="small" onClick={()=> deleteHandler()}>Удалить</Button>
+        <Button style={{border: '1px solid red'}} size="small" onClick={()=> deleteHandler(id)}>Удалить</Button>
       </CardActions>
     </Card>
     </div>

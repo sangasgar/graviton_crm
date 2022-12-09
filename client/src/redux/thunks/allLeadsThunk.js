@@ -2,7 +2,7 @@ import getAllLeadsAC from '../actions/allLeadsAction';
 
 const getAllLeadsThunk = () => async (dispatch) => {
   try {
-    const response = await fetch(`http://localhost:3030/leads`);
+    const response = await fetch(`${process.env.REACT_APP_HOST}/leads/all`);
     const data = await response.json();
     if (response.ok) {
       dispatch(getAllLeadsAC(data));

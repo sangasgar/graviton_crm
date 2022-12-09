@@ -2,7 +2,7 @@ import getAllCompanyAC from '../actions/getAllCompanyAC';
 
 const getAllCompanyThunk = () => async (dispatch) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_HOST}/company`);
+    const response = await fetch(`${process.env.REACT_APP_HOST}/companies/all`);
     const data = await response.json();
     if (response.ok) {
       dispatch(getAllCompanyAC(data));

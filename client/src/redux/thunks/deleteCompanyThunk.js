@@ -2,11 +2,12 @@ import deleteCompanyAC from '../actions/deleteCompanyAC.js';
 
 const deleteCompanyThunk = (id) => async (dispatch) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_HOST}/company/${id}`, {
+    const response = await fetch(`${process.env.REACT_APP_HOST}/companies/${id}`, {
         method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
         },);
     if (response.ok) {
       dispatch(deleteCompanyAC(id));
+      console.log('Компания удалена');
     } else {
       // eslint-disable-next-line no-alert
       alert('Что-то пошло не так!');

@@ -30,8 +30,6 @@ export default function Company() {
     useEffect(()=>{
     dispatch(getAllCompanyThunk())
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log(allCompany);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
   return (
@@ -39,11 +37,12 @@ export default function Company() {
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell style={{backgroundColor: "grey"}}>id</StyledTableCell>
-            <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Name</StyledTableCell>
-            <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Contact</StyledTableCell>
-            <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Balance</StyledTableCell>
-            <StyledTableCell align="right" style={{backgroundColor: "grey"}}>Comment</StyledTableCell>
+            <StyledTableCell style={{backgroundColor: "#0dd6c9"}}>id</StyledTableCell>
+            <StyledTableCell align="right" style={{backgroundColor: "#0dd6c9"}}>Name</StyledTableCell>
+            <StyledTableCell align="right" style={{backgroundColor: "#0dd6c9"}}>Contact</StyledTableCell>
+            <StyledTableCell align="right" style={{backgroundColor: "#0dd6c9"}}>Email</StyledTableCell>
+            <StyledTableCell align="right" style={{backgroundColor: "#0dd6c9"}}>Balance</StyledTableCell>
+            <StyledTableCell align="right" style={{backgroundColor: "#0dd6c9"}}>Comment</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
