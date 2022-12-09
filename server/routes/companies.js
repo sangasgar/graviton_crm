@@ -23,8 +23,8 @@ router.get('/all', async (req, res, next) => {
   }
 });
 router.get('/:id', async (req, res, next) => {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
     const companies = await Companies.findOne({
       where: { id },
       include: Payments,
