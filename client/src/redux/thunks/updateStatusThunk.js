@@ -7,7 +7,7 @@ const updateStatusThunk = (id, status_id) => async (dispatch) => {
             'Content-Type': 'application/json',
             authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({status_id}) // body data type must match "Content-Type" header
+          body: JSON.stringify({status_id})
         });
       if (response.ok) {
         console.log('Статус изменен');

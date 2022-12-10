@@ -1,29 +1,15 @@
-import { Modal, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import {useState} from 'react'
+import { Modal, Button, Form } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react'
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import getAllCompanyThunk from '../../redux/thunks/getAllCompanyThunk';
-import MenuItem from '@mui/material/MenuItem';
-import sendLeadThunk from '../../redux/thunks/sendLeadThunk';
+import addBalanceThunk from '../../redux/thunks/addBalanceThunk';
 
-export default function AddBalanceModal ({ idLead, show, onHide}) {
-const [company, setCompany] = useState('');
-const dispatch = useDispatch()
-const allCompany = useSelector((store) => store.allCompany);
-    React.useEffect(()=> {
-    dispatch(getAllCompanyThunk())
-// eslint-disable-next-line react-hooks/exhaustive-deps
-}, [])
-    const handleChange = (event) => {
-    setCompany(event.target.value);
-  };
-    const  addLeadSendHandler  = (idLead, comp) => {
-        const idCompany = allCompany.find(el => el.name === comp)
-        dispatch(sendLeadThunk(idLead, idCompany.id))
+export default function AddBalanceModal ({ show, onHide, companyId}) {
+    const [balance, setBalance] = useState('');
+    const dispatch = useDispatch()
+    const  addBalanceHandler  = (company_id, payment_sum) => {
+        dispatch(addBalanceThunk(company_id, payment_sum))
         onHide()
   }
     return (
@@ -40,22 +26,18 @@ const allCompany = useSelector((store) => store.allCompany);
       </Modal.Header>
       <Modal.Body />
       <Box sx={{ minWidth: 100}}>
-       <FormControl fullWidth>
-        <InputLabel>Список</InputLabel>
-         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={company}
-          label="company"
-          onChange={handleChange}
-         >
-            {allCompany.map((el, index) =>  <MenuItem value={el?.name}>{el?.name}</MenuItem>)}
-         </Select>
-       </FormControl>
+        <Form style={{margin: '0 30px'}}>
+        <Form.Control
+          value={balance}
+          onChange={(e) => setBalance(e.target.value)}
+          className="mb-2 border border-secondary"
+          placeholder="Введите сумму"
+        />
+      </Form>
     </Box>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>Закрыть</Button>
-        <Button variant="secondary" onClick={()=> addLeadSendHandler(idLead, company)}>Подтвердить</Button>
+        <Button variant="secondary" onClick={()=> addBalanceHandler(companyId, balance)}>Подтвердить</Button>
       </Modal.Footer>
     </Modal>
     )

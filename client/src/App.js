@@ -21,7 +21,7 @@ function App() {
   }, [])
   return (
     <div className="App">
-        <Container>
+        <Container sx={{ mt: '5em' }}>
         {user.name ? <Navbar/> : null}
         <Routes>
           <Route path="/leads" element={user.name ? <Leads/> : <Navigate replace to="/" />}/>
@@ -30,7 +30,7 @@ function App() {
           <Route path="/company/:id" element={user.name ? <DescriptionCompany/> : <Navigate replace to="/" />} />
           <Route path="/lk" element={user.name ? <MainAdmin/> : <Navigate replace to="/" />}/>
           <Route path="/" element={!user.name ? <SignInSide/> : <Navigate replace to="/leads" />}/>
-        </Routes>
+        </Routes>  
         </Container>
     </div>
   );

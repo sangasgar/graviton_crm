@@ -4,7 +4,7 @@ const getAllCompanyThunk = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
     const response = await fetch(`${process.env.REACT_APP_HOST}/companies/all`, {
-      method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',
          authorization: `Bearer ${token}`,

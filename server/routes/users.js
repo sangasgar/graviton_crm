@@ -44,7 +44,7 @@ router.route('/')
       const {
         id, name, email, password,
       } = req.body;
-      if ((id && name) || (id && name) || (id && email) || (id && password)) {
+      if ((id && name) || (id && email) || (id && password)) {
         if (name) {
           await Users.update({ name }, { where: { id } });
         }

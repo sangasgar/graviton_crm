@@ -39,7 +39,7 @@ export default function CustomizedTables({row}) {
               <StyledTableCell align="right">
               {row.Status.name === 'Активный' ? (<Button color="success" variant="contained" onClick={() => setSendCompanyVisible(true)}>Передать в компанию</Button>) :
               (<Button variant="contained" disabled>
-                {row?.Company.name}
+                {row?.Company?.name ? row?.Company?.name : 'Отсутсвует'}
                </Button>)}
               </StyledTableCell>
               <SendCompanyModal idLead={row?.id} show={sendCompanyVisible} onHide={() => setSendCompanyVisible(false)} />

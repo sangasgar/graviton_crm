@@ -4,6 +4,7 @@ const express = require('express');
 const { Payments } = require('../db/models');
 const { Companies } = require('../db/models');
 const db = require('../db/models');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
@@ -11,13 +12,13 @@ const router = express.Router();
 router.get('/', (req, res, next) => {
   res.send('respond with a resource');
 });
-router.get('/all', (req, res, next) => {
+router.get('/all', auth, (req, res, next) => {
   res.json('Получить все платежы');
 });
-router.post('/add', async (req, res, next) => {
+router.post('/add', auth, async (req, res, next) => {
   try {
     const { company_id, payment_sum, comment } = req.body;
-    if (company_id && payment_sum) {
+    if (company_id && payment_sum && payment_sum > 0) {
       const t = await db.sequelize.transaction();
       const payment = await Payments.create({ company_id, price: payment_sum, comment }, { transaction: t });
       const company = JSON.parse(JSON.stringify(await Companies.findOne({ where: { id: company_id } })));

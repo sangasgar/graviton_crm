@@ -1,14 +1,15 @@
 const express = require('express');
 const { Companies } = require('../db/models');
 const { Payments } = require('../db/models');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
+router.get('/', auth, (req, res, next) => {
   res.send('Graviton CRM');
 });
-router.get('/all', async (req, res, next) => {
+router.get('/all', auth, async (req, res, next) => {
   try {
     const companies = await Companies.findAll({
       order: [
@@ -22,7 +23,7 @@ router.get('/all', async (req, res, next) => {
     return res.json({ error: 'Ошибка соеднинения' });
   }
 });
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', auth, async (req, res, next) => {
   try {
     const { id } = req.params;
     const companies = await Companies.findOne({
@@ -39,7 +40,7 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-router.post('/add', async (req, res, next) => {
+router.post('/add', auth, async (req, res, next) => {
   try {
     const {
       name, phone, email, comment,
@@ -61,7 +62,7 @@ router.post('/add', async (req, res, next) => {
   }
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', auth, async (req, res, next) => {
   try {
     const { id } = req.params;
     if (id) {

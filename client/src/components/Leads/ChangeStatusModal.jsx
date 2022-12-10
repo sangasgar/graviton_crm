@@ -2,7 +2,6 @@ import {useState} from 'react'
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useDispatch} from 'react-redux';
 import updateStatusThunk from '../../redux/thunks/updateStatusThunk';
-// import addLeadThunk from '../../../redux/thunks/addLeadThunk';
 
 export default function ChangeStatusModal ({ show, onHide, idLead}) {
 const [status, setStatus] = useState('')
@@ -29,7 +28,7 @@ const handleChange = (event) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body />
-      <Form>
+      <Form style={{margin: '0 30px'}}>
         <Form.Select aria-label="Default select example" value={status} onChange={handleChange}>
          <option>Выберите тип</option>
          <option value={1}>Активный</option>
