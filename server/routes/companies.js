@@ -23,11 +23,14 @@ router.get('/all', async (req, res, next) => {
   }
 });
 router.get('/:id', async (req, res, next) => {
-  const { id } = req.params;
   try {
+    const { id } = req.params;
     const companies = await Companies.findOne({
       where: { id },
       include: Payments,
+      order: [
+        ['updatedAt', 'DESC'],
+      ],
     });
     const companiesJson = JSON.parse(JSON.stringify(companies));
     return res.json(companiesJson);
@@ -35,6 +38,7 @@ router.get('/:id', async (req, res, next) => {
     return res.json({ error: 'Ошибка соеднинения' });
   }
 });
+
 router.post('/add', async (req, res, next) => {
   try {
     const {
