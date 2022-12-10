@@ -33,7 +33,6 @@ export default function DescriptionCompany() {
     const dispatch = useDispatch()
     const {id} = useParams()
     const dataCompany = useSelector((store) => store.descriptionCompany);
-    console.log(dataCompany);
     const navigate = useNavigate();
     
   const deleteHandler = (id) => {
