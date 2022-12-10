@@ -117,7 +117,7 @@ router.patch('/lead-send', async (req, res, next) => {
       })));
       const companySearch = JSON.parse(JSON.stringify(await Companies.findOne({ id: company_id })));
       const balanceUpdate = companySearch.balance - lead.Leads_type.price;
-      if (lead.Status.id !== 2 && lead.Company === null) {
+      if (lead.Status.id !== 2 && lead.Company === null && balanceUpdate > 0) {
         const t = await db.sequelize.transaction();
         const leads = await Leads.update({ company_id, status_id: 2 }, { where: { id } }, { transaction: t });
         const company = await Companies.update(
