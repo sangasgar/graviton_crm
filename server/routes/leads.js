@@ -6,14 +6,15 @@ const { Leads_type } = require('../db/models');
 const { Companies } = require('../db/models');
 const { Statuses } = require('../db/models');
 const db = require('../db/models');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 
 /* GET home page. */
-router.get('/', (req, res, next) => {
+router.get('/', auth, (req, res, next) => {
   res.json('Graviton CRM');
 });
-router.get('/all', async (req, res, next) => {
+router.get('/all', auth, async (req, res, next) => {
   try {
     const leads = await Leads.findAll({
       order: [
@@ -29,7 +30,7 @@ router.get('/all', async (req, res, next) => {
     return res.json({ error: 'Ошибка соеднинения' });
   }
 });
-router.post('/add', async (req, res, next) => {
+router.post('/add', auth, async (req, res, next) => {
   try {
     const {
       lead_type_id, company_id, lead_name, lead_phone, comment,
@@ -53,7 +54,7 @@ router.post('/add', async (req, res, next) => {
 });
 
 router.route('/:id')
-  .get(async (req, res, next) => {
+  .get(auth, async (req, res, next) => {
     const { id } = req.params;
     try {
       const leads = await Leads.findOne({
@@ -68,7 +69,7 @@ router.route('/:id')
       return res.json({ error: 'Ошибка соеднинения' });
     }
   })
-  .delete(async (req, res, next) => {
+  .delete(auth, async (req, res, next) => {
     try {
       const { id } = req.params;
       if (id) {
@@ -81,7 +82,7 @@ router.route('/:id')
       return res.json({ createLeadStatus: false });
     }
   });
-router.patch('/:id/update-status', async (req, res, next) => {
+router.patch('/:id/update-status', auth, async (req, res, next) => {
   try {
     const { id } = req.params;
     const { status_id } = req.body;
@@ -103,7 +104,7 @@ router.patch('/:id/update-status', async (req, res, next) => {
     return res.json({ updateCompanyBalance: false, resetLeadStatus: false });
   }
 });
-router.patch('/lead-send', async (req, res, next) => {
+router.patch('/lead-send', auth, async (req, res, next) => {
   try {
     const {
       id, company_id,
