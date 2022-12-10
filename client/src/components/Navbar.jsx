@@ -9,8 +9,11 @@ import { Link } from 'react-router-dom';
 
 const navItems = [{'name': 'Лиды', 'href': '/leads'}, {'name': 'Компании', 'href': '/company'}, {'name': "Личный кабинет", 'href': '/lk'}];
 
-
 function Navbar() {
+  const clickHandler = () => {
+    localStorage.removeItem('token')
+    window.location.reload(); 
+  }
   
   return (
       <AppBar component="nav" style={{backgroundColor: "#0dd6c9", color: 'black', fontFamily: 'Arial Black'}}>
@@ -31,6 +34,11 @@ function Navbar() {
                 {item.name}
               </Link>
             ))}
+            <Link to='/' style={{
+                 fontSize: '20px', letterSpacing: '2px', color: 'white', margin: '3px' 
+              }} onClick={clickHandler}>
+                Выйти
+              </Link>
           </Box>
         </Toolbar>
       </AppBar>

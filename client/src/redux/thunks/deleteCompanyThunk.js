@@ -2,9 +2,13 @@ import deleteCompanyAC from '../actions/deleteCompanyAC.js';
 
 const deleteCompanyThunk = (id) => async (dispatch) => {
   try {
+    const token = localStorage.getItem('token');
     const response = await fetch(`${process.env.REACT_APP_HOST}/companies/${id}`, {
-        method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
-        },);
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+           authorization: `Bearer ${token}`,
+        }});
     if (response.ok) {
       dispatch(deleteCompanyAC(id));
       console.log('Компания удалена');

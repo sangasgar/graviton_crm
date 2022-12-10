@@ -1,9 +1,11 @@
 const addCompanyThunk = (name, phone, email, comment) => async (dispatch) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(`${process.env.REACT_APP_HOST}/companies/add`, {
           method: 'POST', // *GET, POST, PUT, DELETE, etc.
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+             authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({name, phone, email, comment}) // body data type must match "Content-Type" header
         });

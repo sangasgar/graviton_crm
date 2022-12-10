@@ -1,16 +1,16 @@
-const sendLeadThunk = (id, company_id) => async (dispatch) => {
+const updateStatusThunk = (id, status_id) => async (dispatch) => {
     try {
     const token = localStorage.getItem('token');
-      const response = await fetch(`${process.env.REACT_APP_HOST}/leads/lead-send`, {
+      const response = await fetch(`${process.env.REACT_APP_HOST}/leads/${id}/update-status`, {
           method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
           headers: {
             'Content-Type': 'application/json',
             authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({id, company_id}) // body data type must match "Content-Type" header
+          body: JSON.stringify({status_id}) // body data type must match "Content-Type" header
         });
       if (response.ok) {
-        console.log('Лид назначен комапнии');
+        console.log('Статус изменен');
       } else {
         // eslint-disable-next-line no-alert
         alert('Что-то пошло не так!');
@@ -21,5 +21,5 @@ const sendLeadThunk = (id, company_id) => async (dispatch) => {
     }
   };
   
-  export default sendLeadThunk;
+  export default updateStatusThunk;
   

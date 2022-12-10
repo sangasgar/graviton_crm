@@ -2,7 +2,13 @@ import getAllCompanyAC from '../actions/getAllCompanyAC';
 
 const getAllCompanyThunk = () => async (dispatch) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_HOST}/companies/all`);
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${process.env.REACT_APP_HOST}/companies/all`, {
+      method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json',
+         authorization: `Bearer ${token}`,
+      }});
     const data = await response.json();
     if (response.ok) {
       dispatch(getAllCompanyAC(data));

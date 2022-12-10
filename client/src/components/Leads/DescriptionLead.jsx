@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
 import getDescriptionLeadThunk from '../../redux/thunks/getDescriptionLeadThunk'
@@ -10,6 +10,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import deleteLeadThunk from '../../redux/thunks/deleteLeadThunk';
+import ChangeStatusModal from './ChangeCompanyModal';
 
 const useStyles = makeStyles({
   root: {
@@ -31,6 +32,7 @@ const useStyles = makeStyles({
 });
 
 export default function DescriptionLead() {
+  const [changeCompanyVisible, setChangeCompanyVisible] = useState(false)
     const dispatch = useDispatch()
     const {id} = useParams()
     const dataLead = useSelector((store) => store.descriptionLead);
@@ -64,6 +66,8 @@ export default function DescriptionLead() {
         <Typography variant="body2" component="p">
           Комментарий: {dataLead?.comment}
         </Typography>
+        {dataLead?.Status?.name !== 'Активный' ? <Button variant="outlined" onClick={()=> setChangeCompanyVisible(true)}>Изменить статус лида</Button> : <div></div>}
+        <ChangeStatusModal show={changeCompanyVisible} onHide={() => setChangeCompanyVisible(false)} idLead={id}/>
       </CardContent>
       <CardActions>
         <Button style={{border: '1px solid red'}} size="small" onClick={()=> deleteHandler(id)}>Удалить</Button>

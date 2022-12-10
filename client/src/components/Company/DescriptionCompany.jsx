@@ -1,5 +1,5 @@
 import getDescriptionCompanyThunk from '../../redux/thunks/getDescriptionCompanyThunk'
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,6 +9,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import deleteCompanyThunk from '../../redux/thunks/deleteCompanyThunk';
+import AddBalanceModal from './AddBalanceModal';
 
 const useStyles = makeStyles({
   root: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles({
 });
 
 export default function DescriptionCompany() {
+  const [addBalanceVisible, setAddBalanceVisible] = useState(false)
     const dispatch = useDispatch()
     const {id} = useParams()
     const dataCompany = useSelector((store) => store.descriptionCompany);
@@ -65,6 +67,8 @@ export default function DescriptionCompany() {
           Комментарий: {dataCompany?.comment}
         </Typography>
       </CardContent>
+       <Button variant="outlined" onClick={()=> setAddBalanceVisible(true)}>Изменить статус лида</Button>
+        <AddBalanceModal show={addBalanceVisible} onHide={() => setAddBalanceVisible(false)}/>
       <CardActions>
         <Button style={{border: '1px solid red'}} size="small" onClick={()=> deleteHandler(id)}>Удалить</Button>
       </CardActions>
