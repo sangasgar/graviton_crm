@@ -1,3 +1,3 @@
-const checkAuthAC = (payload) => ({type: 'CHECK_AUTH', payload})
+const checkAuthAC = (payload) => ({ type: 'CHECK_AUTH', payload });
 
-export default checkAuthAC
+export default checkAuthAC;
