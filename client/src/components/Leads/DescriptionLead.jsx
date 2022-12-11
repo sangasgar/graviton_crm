@@ -1,36 +1,54 @@
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
 import getDescriptionLeadThunk from '../../redux/thunks/getDescriptionLeadThunk'
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import deleteLeadThunk from '../../redux/thunks/deleteLeadThunk';
+import ChangeStatusModal from './ChangeStatusModal';
 
 const useStyles = makeStyles({
-  root: {
-    width: 500,
+  container: {
+    position: 'absolute',
+    display: 'flex',
+    flexDirection: 'column',
+    width: 1300,
     height: 600,
-    border: 'thick double grey',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    backgroundColor:'#C1F7EE',
+    margin: '50px',
+    flexWrap: 'wrap'
   },
   title: {
-    fontSize: 18,
+    margin: '10px',
+    height: 500,
+    width: 600
   },
-  pos: {
-    marginBottom: 12,
+  button: {
+    position:'absolute',
+    bottom: '30px',
+    right: '630px'
   },
+  root: {
+  background: '#188A77',
+  position: 'absolute',
+  top: '4em',
+  right: '0px',
+  bottom: '0px',
+  left: '0px',
+  display: 'flex',
+  justifyContent: 'center'
+  },
+  content: {
+    margin: '30px',
+    fontFamily: 'Impact, fantasy',
+    fontSize: '24px',
+    color: '#188A77'
+  }
 });
 
 export default function DescriptionLead() {
+  const [changeCompanyVisible, setChangeCompanyVisible] = useState(false)
     const dispatch = useDispatch()
     const {id} = useParams()
     const dataLead = useSelector((store) => store.descriptionLead);
@@ -39,36 +57,44 @@ export default function DescriptionLead() {
         dispatch(deleteLeadThunk(id))
         navigate('/leads')
     }
+    const [value, setValue] = useState(false)
+
     useEffect(()=>{
         dispatch(getDescriptionLeadThunk(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    },[value])
   const classes = useStyles();
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center' }}>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
+    <div className={classes.root}>
+      <div className={classes.container}>
+        <div className={classes.title}>
+          <div className={classes.content}>
           Название: {dataLead?.lead_name}
-        </Typography>
-        <Typography variant="h5" component="h2">
+          </div>
+          <div className={classes.content}>
           Тип лида: {dataLead?.Leads_type?.name}
-        </Typography>
-        <Typography className={classes?.pos} color="textSecondary">
-          Какой компании передан: {dataLead?.Company?.name}
-        </Typography>
-        <Typography variant="body2" component="p">
-          Статус: {dataLead?.Status?.name}
-        </Typography>
-        <Typography variant="body2" component="p">
+          </div>
+          <div className={classes.content}>
           Комментарий: {dataLead?.comment}
-        </Typography>
-      </CardContent>
-      <CardActions>
+          </div>
+        </div>
+        <div className={classes.title}>
+        <div className={classes.content}>
+          Компания: {dataLead?.Company?.name}
+          </div>
+          <div className={classes.content}>
+          Статус: {dataLead?.Status?.name}
+          </div>
+          <div className={classes.content}>
+          {dataLead?.Status?.name !== 'Активный' ? <Button variant="outlined" onClick={()=> setChangeCompanyVisible(true)}>Изменить статус лида</Button> : <div></div>}
+          </div>
+        <ChangeStatusModal value={value} setValue={setValue} show={changeCompanyVisible} onHide={() => setChangeCompanyVisible(false)} idLead={id}/>
+        </div>
+        <div className={classes.button}>
         <Button style={{border: '1px solid red'}} size="small" onClick={()=> deleteHandler(id)}>Удалить</Button>
-      </CardActions>
-    </Card>
-    </div>
+      </div>
+      </div>
+      </div>
   );
 }

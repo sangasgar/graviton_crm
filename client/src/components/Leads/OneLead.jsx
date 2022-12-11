@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import SendCompanyModal from './SendCompanyModal';
 
 
+
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
@@ -25,8 +26,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 16,
   },
 }));
+
 export default function CustomizedTables({row}) {
   const [sendCompanyVisible, setSendCompanyVisible] = React.useState(false)
+  
   return (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">
@@ -39,7 +42,7 @@ export default function CustomizedTables({row}) {
               <StyledTableCell align="right">
               {row.Status.name === 'Активный' ? (<Button color="success" variant="contained" onClick={() => setSendCompanyVisible(true)}>Передать в компанию</Button>) :
               (<Button variant="contained" disabled>
-                {row?.Company.name}
+                {row?.Company?.name ? row?.Company?.name : 'Отсутсвует'}
                </Button>)}
               </StyledTableCell>
               <SendCompanyModal idLead={row?.id} show={sendCompanyVisible} onHide={() => setSendCompanyVisible(false)} />

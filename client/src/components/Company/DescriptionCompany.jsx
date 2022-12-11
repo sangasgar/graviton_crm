@@ -1,40 +1,60 @@
 import getDescriptionCompanyThunk from '../../redux/thunks/getDescriptionCompanyThunk'
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import {useNavigate, useParams} from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import deleteCompanyThunk from '../../redux/thunks/deleteCompanyThunk';
+import AddBalanceModal from './AddBalanceModal';
 
 const useStyles = makeStyles({
-  root: {
-    width: 500,
+  container: {
+    position: 'absolute',
+    display: 'flex',
+    flexDirection: 'column',
+    width: 1300,
     height: 600,
-    border: 'thick double grey',
-  },
-  bullet: {
-    display: 'inline-block',
-    margin: '0 2px',
-    transform: 'scale(0.8)',
+    backgroundColor:'#C1F7EE',
+    margin: '50px',
+    flexWrap: 'wrap'
   },
   title: {
-    fontSize: 18,
+    margin: '10px',
+    height: 500,
+    width: 600
   },
-  pos: {
-    marginBottom: 12,
+  button: {
+    position:'absolute',
+    bottom: '20%',
+    right: '50%'
   },
+  root: {
+  background: '#188A77',
+  position: 'absolute',
+  top: '4em',
+  right: '0px',
+  bottom: '0px',
+  left: '0px',
+  display: 'flex',
+  justifyContent: 'center'
+  },
+  content: {
+    margin: '30px',
+    fontFamily: 'Impact, fantasy',
+    fontSize: '24px',
+    color: '#188A77'
+  }
 });
 
+
 export default function DescriptionCompany() {
+  const [addBalanceVisible, setAddBalanceVisible] = useState(false)
     const dispatch = useDispatch()
     const {id} = useParams()
     const dataCompany = useSelector((store) => store.descriptionCompany);
     console.log(dataCompany);
     const navigate = useNavigate();
+    const [value, setValue] = useState(false)
     
   const deleteHandler = (id) => {
         dispatch(deleteCompanyThunk(id))
@@ -43,33 +63,57 @@ export default function DescriptionCompany() {
     useEffect(()=>{
         dispatch(getDescriptionCompanyThunk(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    },[value])
   const classes = useStyles();
 
   return (
-    <div style={{display: 'flex', justifyContent: 'center' }}>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography className={classes.title} color="textSecondary" gutterBottom>
+    <div className={classes.root}>
+    <div className={classes.container}>
+      <div className={classes.title}>
+        <div className={classes.content}>
           Название: {dataCompany?.name}
-        </Typography>
-        <Typography variant="h5" component="h2">
+        </div>
+        <div className={classes.content}>
           Телефон: {dataCompany?.phone}
-        </Typography>
-        <Typography variant="body2" component="p">
+        </div>
+        <div className={classes.content}>
           Email: {dataCompany?.email}
-        </Typography>
-        <Typography className={classes.pos} color="textSecondary">
-          Баланс: {dataCompany?.balance}
-        </Typography>
-        <Typography variant="body2" component="p">
+        </div>
+        <div className={classes.content}>
           Комментарий: {dataCompany?.comment}
-        </Typography>
-      </CardContent>
-      <CardActions>
+        </div>
+        </div>
+        <div className={classes.title}>
+          <div className={classes.content}>
+          Баланс: {dataCompany?.balance} $
+          </div>
+          <div className={classes.content}>
+       <Button variant="outlined" onClick={()=> setAddBalanceVisible(true)}>Пополнить баланс</Button>
+          </div>
+          <div>
+        <table class="table">
+	          <thead>
+		          <tr>
+                <th>Сумма</th>
+                <th>Комментарий</th>
+                <th>Дата пополнения</th>
+		            </tr>
+	          </thead>
+	        <tbody>
+            {dataCompany?.Payments?.map(el => <tr>
+                <td>{el?.price}</td>
+                <td>{el?.comment}</td>
+                <td>{el?.createdAt}</td>
+		          </tr>)}
+	            </tbody>
+        </table>
+          </div>
+          </div>
+      </div>
+        <AddBalanceModal value={value} setValue={setValue} show={addBalanceVisible} onHide={() => setAddBalanceVisible(false)} companyId={dataCompany?.id}/>
+      <div className={classes.button}>
         <Button style={{border: '1px solid red'}} size="small" onClick={()=> deleteHandler(id)}>Удалить</Button>
-      </CardActions>
-    </Card>
+      </div>
     </div>
   );
 }

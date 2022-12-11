@@ -1,15 +1,16 @@
-const addCompanyThunk = (name, phone, email, comment) => async (dispatch) => {
+const addBalanceThunk = (company_id, payment_sum) => async (dispatch) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`${process.env.REACT_APP_HOST}/companies/add`, {
+      const response = await fetch(`${process.env.REACT_APP_HOST}/payments/add`, {
           method: 'POST', // *GET, POST, PUT, DELETE, etc.
           headers: {
             'Content-Type': 'application/json',
              authorization: `Bearer ${token}`,
           },
-          body: JSON.stringify({name, phone, email, comment}) // body data type must match "Content-Type" header
+          body: JSON.stringify({company_id, payment_sum}) // body data type must match "Content-Type" header
         });
-      if (response.ok) {
+        const data = await response.json();
+      if (data.createPaymentStatus) {
         console.log('Компания добавлена');
       } else {
         // eslint-disable-next-line no-alert
@@ -21,5 +22,5 @@ const addCompanyThunk = (name, phone, email, comment) => async (dispatch) => {
     }
   };
   
-  export default addCompanyThunk;
+  export default addBalanceThunk;
   

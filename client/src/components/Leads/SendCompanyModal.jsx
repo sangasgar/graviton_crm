@@ -10,7 +10,7 @@ import getAllCompanyThunk from '../../redux/thunks/getAllCompanyThunk';
 import MenuItem from '@mui/material/MenuItem';
 import sendLeadThunk from '../../redux/thunks/sendLeadThunk';
 
-export default function SendCompanyModal ({ idLead, show, onHide}) {
+export default function SendCompanyModal ({idLead, show, onHide}) {
 const [company, setCompany] = useState('');
 const dispatch = useDispatch()
 const allCompany = useSelector((store) => store.allCompany);
@@ -22,9 +22,9 @@ const allCompany = useSelector((store) => store.allCompany);
     setCompany(event.target.value);
   };
     const  addLeadSendHandler  = (idLead, comp) => {
-        const idCompany = allCompany.find(el => el.name === comp)
-        dispatch(sendLeadThunk(idLead, idCompany.id))
+        dispatch(sendLeadThunk(idLead, comp))
         onHide()
+        window.location.reload()
   }
     return (
 <Modal
@@ -40,7 +40,7 @@ const allCompany = useSelector((store) => store.allCompany);
       </Modal.Header>
       <Modal.Body />
       <Box sx={{ minWidth: 100}}>
-       <FormControl fullWidth>
+       <FormControl style={{margin: '0 30px', width: '90%'}}>
         <InputLabel>Список</InputLabel>
          <Select
           labelId="demo-simple-select-label"
@@ -49,7 +49,7 @@ const allCompany = useSelector((store) => store.allCompany);
           label="company"
           onChange={handleChange}
          >
-            {allCompany.map((el, index) =>  <MenuItem value={el?.name}>{el?.name}</MenuItem>)}
+            {allCompany.map((el, index) =>  <MenuItem value={el?.id}>{el?.name}</MenuItem>)}
          </Select>
        </FormControl>
     </Box>

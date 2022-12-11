@@ -1,17 +1,11 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
 
-
-
-const navItems = [{'name': 'Лиды', 'href': '/leads'}, {'name': 'Компании', 'href': '/company'}, {'name': "Личный кабинет", 'href': '/lk'}];
-
-
 function Navbar() {
-  
+
   return (
       <AppBar component="nav" style={{backgroundColor: "#0dd6c9", color: 'black', fontFamily: 'Arial Black'}}>
         <Toolbar>
@@ -23,15 +17,27 @@ function Navbar() {
           >
             Graviton CRM
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'flex'} }} style={{display: 'flex', justifyContent: 'center'}}>
-            {navItems.map((item) => (
-              <Link to={item.href} key={item} style={{
-                 fontSize: '20px', letterSpacing: '2px', color: 'white', margin: '3px' 
+          <div style={{marginRight: '25%', display: 'flex'}}>
+            <div>
+              <Link to={'/leads'} style={{
+                 fontSize: '20px', letterSpacing: '2px', color: 'black', margin: '3px', textDecoration: 'none'
               }}>
-                {item.name}
+                Лиды
               </Link>
-            ))}
-          </Box>
+              </div>
+              <div>
+              <Link to={'/company'} style={{
+                 fontSize: '20px', letterSpacing: '2px', color:'black', margin: '3px', textDecoration: 'none', marginLeft: '20px'
+              }}>
+                Компании
+              </Link>
+              </div>
+          </div>
+          <Link to={'/lk'} style={{
+                 fontSize: '20px', letterSpacing: '2px', color: 'black', margin: '3px', textDecoration: 'none' 
+              }}>
+                Личный кабинет
+              </Link>
         </Toolbar>
       </AppBar>
   );
