@@ -57,10 +57,12 @@ export default function DescriptionLead() {
         dispatch(deleteLeadThunk(id))
         navigate('/leads')
     }
+    const [value, setValue] = useState(false)
+
     useEffect(()=>{
         dispatch(getDescriptionLeadThunk(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    },[value])
   const classes = useStyles();
 
   return (
@@ -87,7 +89,7 @@ export default function DescriptionLead() {
           <div className={classes.content}>
           {dataLead?.Status?.name !== 'Активный' ? <Button variant="outlined" onClick={()=> setChangeCompanyVisible(true)}>Изменить статус лида</Button> : <div></div>}
           </div>
-        <ChangeStatusModal show={changeCompanyVisible} onHide={() => setChangeCompanyVisible(false)} idLead={id}/>
+        <ChangeStatusModal value={value} setValue={setValue} show={changeCompanyVisible} onHide={() => setChangeCompanyVisible(false)} idLead={id}/>
         </div>
         <div className={classes.button}>
         <Button style={{border: '1px solid red'}} size="small" onClick={()=> deleteHandler(id)}>Удалить</Button>

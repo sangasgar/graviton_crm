@@ -10,7 +10,7 @@ import getAllCompanyThunk from '../../redux/thunks/getAllCompanyThunk';
 import MenuItem from '@mui/material/MenuItem';
 import sendLeadThunk from '../../redux/thunks/sendLeadThunk';
 
-export default function SendCompanyModal ({ idLead, show, onHide}) {
+export default function SendCompanyModal ({idLead, show, onHide}) {
 const [company, setCompany] = useState('');
 const dispatch = useDispatch()
 const allCompany = useSelector((store) => store.allCompany);
@@ -24,7 +24,7 @@ const allCompany = useSelector((store) => store.allCompany);
     const  addLeadSendHandler  = (idLead, comp) => {
         dispatch(sendLeadThunk(idLead, comp))
         onHide()
-    window.location.reload(); 
+        window.location.reload()
   }
     return (
 <Modal

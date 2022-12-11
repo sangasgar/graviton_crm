@@ -5,11 +5,12 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import addBalanceThunk from '../../redux/thunks/addBalanceThunk';
 
-export default function AddBalanceModal ({ show, onHide, companyId}) {
+export default function AddBalanceModal ({value, setValue, show, onHide, companyId}) {
     const [balance, setBalance] = useState('');
     const dispatch = useDispatch()
     const  addBalanceHandler  = (company_id, payment_sum) => {
         dispatch(addBalanceThunk(company_id, payment_sum))
+        setValue(!value)
         onHide()
   }
     return (

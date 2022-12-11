@@ -97,6 +97,11 @@ router.patch('/:id/update-status', auth, async (req, res, next) => {
         const resetLeadStatus = leads[0] === 1;
         return res.json({ updateCompanyBalance, resetLeadStatus });
       }
+      if ((leadFind.status_id === 3 || leadFind.status_id === 4 || leadFind.status_id === 5) && leadFind.company_id === null) {
+        const leads = await Leads.update({ status_id }, { where: { id } });
+        const resetLeadStatus = leads[0] === 1;
+        return res.json({ updateCompanyBalance: false, resetLeadStatus });
+      }
       return res.json({ updateCompanyBalance: false, resetLeadStatus: false });
     }
     return res.json({ updateCompanyBalance: false, resetLeadStatus: false });

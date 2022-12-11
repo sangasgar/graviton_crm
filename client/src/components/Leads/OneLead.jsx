@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import SendCompanyModal from './SendCompanyModal';
 
 
+
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
@@ -25,8 +26,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontSize: 16,
   },
 }));
+
 export default function CustomizedTables({row}) {
   const [sendCompanyVisible, setSendCompanyVisible] = React.useState(false)
+  
   return (
             <StyledTableRow key={row.name}>
               <StyledTableCell component="th" scope="row">

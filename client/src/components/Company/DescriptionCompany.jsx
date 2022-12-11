@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import deleteCompanyThunk from '../../redux/thunks/deleteCompanyThunk';
 import AddBalanceModal from './AddBalanceModal';
-import getLastPaymentThunk from '../../redux/thunks/getLastPaymentThunk';
 
 const useStyles = makeStyles({
   container: {
@@ -53,18 +52,18 @@ export default function DescriptionCompany() {
     const dispatch = useDispatch()
     const {id} = useParams()
     const dataCompany = useSelector((store) => store.descriptionCompany);
-    const allPayments = useSelector((store) => store.allPaymentsCompany)
+    console.log(dataCompany);
     const navigate = useNavigate();
+    const [value, setValue] = useState(false)
     
   const deleteHandler = (id) => {
         dispatch(deleteCompanyThunk(id))
         navigate('/company')
     }
     useEffect(()=>{
-        dispatch(getLastPaymentThunk(id))
         dispatch(getDescriptionCompanyThunk(id))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    },[value])
   const classes = useStyles();
 
   return (
@@ -86,7 +85,7 @@ export default function DescriptionCompany() {
         </div>
         <div className={classes.title}>
           <div className={classes.content}>
-          Баланс: {dataCompany?.balance}
+          Баланс: {dataCompany?.balance} $
           </div>
           <div className={classes.content}>
        <Button variant="outlined" onClick={()=> setAddBalanceVisible(true)}>Пополнить баланс</Button>
@@ -101,17 +100,17 @@ export default function DescriptionCompany() {
 		            </tr>
 	          </thead>
 	        <tbody>
-            {allPayments.map(el => <tr>
-                <td>{el.price}</td>
-                <td>{el.comment}</td>
-                <td>{el.createdAt}</td>
+            {dataCompany?.Payments?.map(el => <tr>
+                <td>{el?.price}</td>
+                <td>{el?.comment}</td>
+                <td>{el?.createdAt}</td>
 		          </tr>)}
 	            </tbody>
         </table>
           </div>
           </div>
       </div>
-        <AddBalanceModal show={addBalanceVisible} onHide={() => setAddBalanceVisible(false)} companyId={dataCompany?.id}/>
+        <AddBalanceModal value={value} setValue={setValue} show={addBalanceVisible} onHide={() => setAddBalanceVisible(false)} companyId={dataCompany?.id}/>
       <div className={classes.button}>
         <Button style={{border: '1px solid red'}} size="small" onClick={()=> deleteHandler(id)}>Удалить</Button>
       </div>

@@ -3,12 +3,13 @@ import { Modal, Button, Form } from 'react-bootstrap';
 import { useDispatch} from 'react-redux';
 import updateStatusThunk from '../../redux/thunks/updateStatusThunk';
 
-export default function ChangeStatusModal ({ show, onHide, idLead}) {
+export default function ChangeStatusModal ({value, setValue, show, onHide, idLead}) {
 const [status, setStatus] = useState('')
 const dispatch = useDispatch()
 
 const changeStatusHandler = (id, status_id) => {
   dispatch(updateStatusThunk(id, status_id))
+  setValue(!value)
   onHide()
 }
 const handleChange = (event) => {
