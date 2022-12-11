@@ -7,8 +7,9 @@ const getDescriptionLeadThunk = (id) => async (dispatch) => {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',
-         authorization: `Bearer ${token}`,
-      }});
+        authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
     if (response.ok) {
       dispatch(getDescriptionLeadAC(data));

@@ -1,15 +1,16 @@
-const addCompanyThunk = (name, phone, email, comment) => async () => {
+/* eslint-disable camelcase */
+const updateUserThunk = (id, name, email, password) => async () => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${process.env.REACT_APP_HOST}/companies/add`, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    const response = await fetch(`${process.env.REACT_APP_HOST}/users`, {
+      method: 'PUT', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        name, phone, email, comment,
-      }), // body data type must match "Content-Type" header
+        id, name, email, password,
+      }),
     });
     if (!response.ok) {
       // eslint-disable-next-line no-alert
@@ -17,8 +18,8 @@ const addCompanyThunk = (name, phone, email, comment) => async () => {
     }
   } catch (error) {
     // eslint-disable-next-line no-console
-    // console.log(error);
+    console.log(error);
   }
 };
 
-export default addCompanyThunk;
+export default updateUserThunk;

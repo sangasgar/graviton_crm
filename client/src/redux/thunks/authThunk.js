@@ -13,7 +13,7 @@ const authThunk = ({ email, password }) => async (dispatch) => {
       });
       if (response.ok) {
         const data = await response.json();
-        dispatch(authAC({id: data.id, email: data.email, name: data.name}));
+        dispatch(authAC({ id: data.id, email: data.email, name: data.name }));
         localStorage.setItem('token', data.token);
         if (!data.token) {
           // eslint-disable-next-line no-alert
