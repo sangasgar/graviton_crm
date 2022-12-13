@@ -10,7 +10,7 @@ const router = express.Router();
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
-  res.send('respond with a resource');
+  res.send('respond with a resource'); cd;
 });
 router.get('/all', auth, (req, res, next) => {
   res.json('Получить все платежы');

@@ -97,6 +97,11 @@ router.patch('/:id/update-status', auth, async (req, res, next) => {
         const resetLeadStatus = leads[0] === 1;
         return res.json({ updateCompanyBalance, resetLeadStatus });
       }
+      if ((leadFind.status_id === 3 || leadFind.status_id === 4 || leadFind.status_id === 5) && leadFind.company_id === null) {
+        const leads = await Leads.update({ status_id }, { where: { id } });
+        const resetLeadStatus = leads[0] === 1;
+        return res.json({ updateCompanyBalance: false, resetLeadStatus });
+      }
       return res.json({ updateCompanyBalance: false, resetLeadStatus: false });
     }
     return res.json({ updateCompanyBalance: false, resetLeadStatus: false });
@@ -116,7 +121,7 @@ router.patch('/lead-send', auth, async (req, res, next) => {
           Statuses,
           Companies],
       })));
-      const companySearch = JSON.parse(JSON.stringify(await Companies.findOne({ id: company_id })));
+      const companySearch = JSON.parse(JSON.stringify(await Companies.findOne({ where: { id: company_id } })));
       const balanceUpdate = companySearch.balance - lead.Leads_type.price;
       if (lead.Status.id !== 2 && lead.Company === null && balanceUpdate > 0) {
         const t = await db.sequelize.transaction();

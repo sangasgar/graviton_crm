@@ -1,26 +1,30 @@
-import {useState} from 'react'
+/* eslint-disable react/prop-types */
+/* eslint-disable camelcase */
+/* eslint-disable no-shadow */
+/* eslint-disable react/react-in-jsx-scope */
+import { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import addLeadThunk from '../../../redux/thunks/addLeadThunk';
 // import styles from './styles.module.css'
 
-export default function Createlead ({ show, onHide}) {
-const [name, setName] = useState('')
-const [phone, setPhone] = useState('')
-const [comment, setComment] = useState('')
-const [typeLeadId, setTypeLeadId] = useState('')
-const dispatch = useDispatch()
+export default function Createlead({ show, onHide }) {
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [comment, setComment] = useState('');
+  const [typeLeadId, setTypeLeadId] = useState('');
+  const dispatch = useDispatch();
 
-const addLeadHandler = (lead_name,lead_phone,comment,lead_type_id) => {
-  dispatch(addLeadThunk(lead_name,lead_phone,comment,lead_type_id))
-  onHide()
-}
-const handleChange = (event) => {
-      setTypeLeadId(event.target.value);
-    };
+  const addLeadHandler = (lead_name, lead_phone, comment, lead_type_id) => {
+    dispatch(addLeadThunk(lead_name, lead_phone, comment, lead_type_id));
+    onHide();
+  };
+  const handleChange = (event) => {
+    setTypeLeadId(event.target.value);
+  };
 
-    return (
-<Modal
+  return (
+    <Modal
       show={show}
       onHide={onHide}
       size="lg"
@@ -38,6 +42,7 @@ const handleChange = (event) => {
          <option value={1}>Стандарт</option>
          <option value={2}>Стандарт+</option>
          <option value={3}>Премиум</option>
+
         </Form.Select>
         <Form.Control
           value={name}
@@ -45,7 +50,7 @@ const handleChange = (event) => {
           className="mb-2 border border-secondary"
           placeholder="Введите название"
         />
-        
+
         <Form.Control
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
@@ -61,8 +66,8 @@ const handleChange = (event) => {
       </Form>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>Закрыть</Button>
-        <Button variant="secondary" onClick={()=> addLeadHandler(name, phone, comment, typeLeadId)}>Добавить</Button>
+        <Button variant="secondary" onClick={() => addLeadHandler(name, phone, comment, typeLeadId)}>Добавить</Button>
       </Modal.Footer>
     </Modal>
-    )
+  );
 }

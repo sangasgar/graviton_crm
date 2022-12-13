@@ -2,7 +2,14 @@ import getDescriptionLeadAC from '../actions/getDescriptionLeadAC';
 
 const getDescriptionLeadThunk = (id) => async (dispatch) => {
   try {
-    const response = await fetch(`${process.env.REACT_APP_HOST}/leads/${id}`);
+    const token = localStorage.getItem('token');
+    const response = await fetch(`${process.env.REACT_APP_HOST}/leads/${id}`, {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
+      headers: {
+        'Content-Type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+    });
     const data = await response.json();
     if (response.ok) {
       dispatch(getDescriptionLeadAC(data));
