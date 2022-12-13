@@ -1,8 +1,11 @@
 /* eslint-disable camelcase */
+import defaultHost from '../../default/defaultHost';
+
+const HOST = defaultHost.main_host
 const updateStatusThunk = (id, status_id) => async () => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${process.env.REACT_APP_HOST}/leads/${id}/update-status`, {
+    const response = await fetch(`${HOST}/leads/${id}/update-status`, {
       method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',

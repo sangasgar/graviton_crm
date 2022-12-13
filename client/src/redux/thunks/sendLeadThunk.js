@@ -1,8 +1,11 @@
 /* eslint-disable camelcase */
+import defaultHost from '../../default/defaultHost';
+
+const HOST = defaultHost.main_host
 const sendLeadThunk = (id, company_id) => async () => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${process.env.REACT_APP_HOST}/leads/lead-send`, {
+    const response = await fetch(`${HOST}/leads/lead-send`, {
       method: 'PATCH', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',

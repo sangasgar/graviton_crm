@@ -11,8 +11,8 @@ const useStyles = makeStyles({
     position: 'absolute',
     display: 'flex',
     flexDirection: 'column',
-    width: 1300,
-    height: 600,
+    width: 900,
+    height: 300,
     backgroundColor: '#C1F7EE',
     margin: '50px',
     flexWrap: 'wrap',
@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   button: {
     position: 'absolute',
     bottom: '30px',
-    right: '630px',
+    right: '450px',
     border: '1px solid red',
   },
   root: {

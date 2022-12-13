@@ -1,9 +1,11 @@
 import getDescriptionLeadAC from '../actions/getDescriptionLeadAC';
+import defaultHost from '../../default/defaultHost';
 
 const getDescriptionLeadThunk = (id) => async (dispatch) => {
+  const HOST = defaultHost.main_host
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${process.env.REACT_APP_HOST}/leads/${id}`, {
+    const response = await fetch(`${HOST}/leads/${id}`, {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',

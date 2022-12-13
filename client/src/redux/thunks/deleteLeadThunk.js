@@ -1,9 +1,10 @@
 import deleteLeadsAC from '../actions/deleteLeadsAC';
-
+import defaultHost from '../../default/defaultHost';
+const HOST = defaultHost.main_host
 const deleteLeadThunk = (id) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${process.env.REACT_APP_HOST}/leads/${id}`, {
+    const response = await fetch(`${HOST}/leads/${id}`, {
       method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',

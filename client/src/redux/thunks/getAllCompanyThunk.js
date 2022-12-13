@@ -1,9 +1,10 @@
 import getAllCompanyAC from '../actions/getAllCompanyAC';
-
+import defaultHost from '../../default/defaultHost';
+const HOST = defaultHost.main_host
 const getAllCompanyThunk = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${process.env.REACT_APP_HOST}/companies/all`, {
+    const response = await fetch(`${HOST}/companies/all`, {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',
