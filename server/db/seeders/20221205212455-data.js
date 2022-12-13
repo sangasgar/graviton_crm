@@ -51,13 +51,19 @@ module.exports = {
       }], {});
     await queryInterface.bulkInsert('Leads_types', [{
       name: 'Стандарт',
+      price: 150.00,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    },
+    {
+      name: 'Стандарт+',
       price: 200.00,
       createdAt: new Date(),
       updatedAt: new Date(),
     },
     {
       name: 'Премиум',
-      price: 250.00,
+      price: 300.00,
       createdAt: new Date(),
       updatedAt: new Date(),
     },

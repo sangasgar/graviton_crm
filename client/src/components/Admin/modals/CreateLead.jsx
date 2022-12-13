@@ -36,7 +36,8 @@ const handleChange = (event) => {
         <Form.Select aria-label="Default select example" onChange={handleChange}>
          <option>Выберите тип</option>
          <option value={1}>Стандарт</option>
-         <option value={2}>Премиум</option>
+         <option value={2}>Стандарт+</option>
+         <option value={3}>Премиум</option>
         </Form.Select>
         <Form.Control
           value={name}
