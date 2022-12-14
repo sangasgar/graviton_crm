@@ -1,6 +1,7 @@
 import getAllCompanyAC from '../actions/getAllCompanyAC';
 import defaultHost from '../../default/defaultHost';
-const HOST = defaultHost.main_host
+
+const HOST = defaultHost.main_host;
 const getAllCompanyThunk = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');

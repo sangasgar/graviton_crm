@@ -2,7 +2,7 @@ import getDescriptionLeadAC from '../actions/getDescriptionLeadAC';
 import defaultHost from '../../default/defaultHost';
 
 const getDescriptionLeadThunk = (id) => async (dispatch) => {
-  const HOST = defaultHost.main_host
+  const HOST = defaultHost.main_host;
   try {
     const token = localStorage.getItem('token');
     const response = await fetch(`${HOST}/leads/${id}`, {

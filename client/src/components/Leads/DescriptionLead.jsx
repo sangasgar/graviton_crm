@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     position: 'absolute',
     display: 'flex',
     flexDirection: 'column',
-    width: 1300,
+    width: 900,
     height: 600,
     backgroundColor: '#C1F7EE',
     margin: '50px',
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   title: {
     margin: '10px',
     height: 500,
-    width: 600,
+    width: 400,
   },
   button: {
     position: 'absolute',

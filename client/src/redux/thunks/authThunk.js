@@ -2,8 +2,8 @@ import authAC from '../actions/authAC';
 import defaultHost from '../../default/defaultHost';
 /* eslint-disable no-alert */
 
+const HOST = defaultHost.main_host;
 const authThunk = ({ email, password }) => async (dispatch) => {
-  const HOST = defaultHost.main_host
   try {
     if (email && password) {
       const response = await fetch(`${HOST}/users`, {

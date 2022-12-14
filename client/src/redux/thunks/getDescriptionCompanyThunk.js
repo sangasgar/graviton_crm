@@ -1,6 +1,7 @@
 import getDescriptionCompanyAC from '../actions/getDescriptionCompanyAC';
 import defaultHost from '../../default/defaultHost';
-const HOST = defaultHost.main_host
+
+const HOST = defaultHost.main_host;
 const getDescriptionCompanyThunk = (id) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');

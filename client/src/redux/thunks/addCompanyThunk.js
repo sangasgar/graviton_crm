@@ -1,5 +1,6 @@
 import defaultHost from '../../default/defaultHost';
-const HOST = defaultHost.main_host
+
+const HOST = defaultHost.main_host;
 const addCompanyThunk = (name, phone, email, comment) => async () => {
   try {
     const token = localStorage.getItem('token');

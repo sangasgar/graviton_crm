@@ -1,6 +1,7 @@
 import getAllLeadsAC from '../actions/allLeadsAction';
 import defaultHost from '../../default/defaultHost';
-const HOST = defaultHost.main_host
+
+const HOST = defaultHost.main_host;
 const getAllLeadsThunk = (valueSort) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');

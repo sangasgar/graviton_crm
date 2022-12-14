@@ -1,8 +1,7 @@
 /* eslint-disable camelcase */
 import defaultHost from '../../default/defaultHost';
 
-const HOST = defaultHost.main_host
-
+const HOST = defaultHost.main_host;
 const updateUserThunk = (id, name, email, password) => async () => {
   try {
     const token = localStorage.getItem('token');

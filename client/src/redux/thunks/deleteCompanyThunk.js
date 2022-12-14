@@ -1,7 +1,8 @@
 /* eslint-disable import/extensions */
 import deleteCompanyAC from '../actions/deleteCompanyAC.js';
 import defaultHost from '../../default/defaultHost';
-const HOST = defaultHost.main_host
+
+const HOST = defaultHost.main_host;
 const deleteCompanyThunk = (id) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');

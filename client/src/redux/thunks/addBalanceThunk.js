@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import defaultHost from '../../default/defaultHost';
-const HOST = defaultHost.main_host
+
+const HOST = defaultHost.main_host;
 const addBalanceThunk = (company_id, payment_sum) => async () => {
   try {
     const token = localStorage.getItem('token');

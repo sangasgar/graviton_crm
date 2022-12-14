@@ -1,6 +1,7 @@
 /* eslint-disable camelcase */
 import defaultHost from '../../default/defaultHost';
-const HOST = defaultHost.main_host
+
+const HOST = defaultHost.main_host;
 const addLeadThunk = (lead_name, lead_phone, comment, lead_type_id) => async () => {
   try {
     const token = localStorage.getItem('token');

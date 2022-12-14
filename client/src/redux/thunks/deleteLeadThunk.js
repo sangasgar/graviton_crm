@@ -1,6 +1,7 @@
 import deleteLeadsAC from '../actions/deleteLeadsAC';
 import defaultHost from '../../default/defaultHost';
-const HOST = defaultHost.main_host
+
+const HOST = defaultHost.main_host;
 const deleteLeadThunk = (id) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
