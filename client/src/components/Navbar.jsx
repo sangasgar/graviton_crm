@@ -8,7 +8,7 @@ function Navbar() {
   return (
     <AppBar component="nav" style={{ backgroundColor: '#0dd6c9', color: 'black', fontFamily: 'Arial Black' }}>
       <Toolbar>
-        <img style={{ width: '40px', paddingRight: '10px' }} src="../../2022-12-05 22.55.12.jpg" alt="" srcSet="" />
+        <img style={{ width: '40px', paddingRight: '10px' }} src="../../img/logo.jpg" alt="" srcSet="" />
         <Typography
           variant="h6"
           component="div"

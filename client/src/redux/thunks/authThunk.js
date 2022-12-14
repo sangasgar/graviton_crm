@@ -1,10 +1,12 @@
-/* eslint-disable no-alert */
 import authAC from '../actions/authAC';
+import defaultHost from '../../default/defaultHost';
+/* eslint-disable no-alert */
 
+const HOST = defaultHost.main_host;
 const authThunk = ({ email, password }) => async (dispatch) => {
   try {
     if (email && password) {
-      const response = await fetch(`${process.env.REACT_APP_HOST}/users`, {
+      const response = await fetch(`${HOST}/users`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',

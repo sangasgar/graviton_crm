@@ -1,9 +1,11 @@
 import getAllLeadsAC from '../actions/allLeadsAction';
+import defaultHost from '../../default/defaultHost';
 
+const HOST = defaultHost.main_host;
 const getAllLeadsThunk = (valueSort) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${process.env.REACT_APP_HOST}/leads/all`, {
+    const response = await fetch(`${HOST}/leads/all`, {
       method: 'GET', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',

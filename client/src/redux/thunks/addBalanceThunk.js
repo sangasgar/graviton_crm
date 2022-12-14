@@ -1,8 +1,11 @@
 /* eslint-disable camelcase */
+import defaultHost from '../../default/defaultHost';
+
+const HOST = defaultHost.main_host;
 const addBalanceThunk = (company_id, payment_sum) => async () => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${process.env.REACT_APP_HOST}/payments/add`, {
+    const response = await fetch(`${HOST}/payments/add`, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',
