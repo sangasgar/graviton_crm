@@ -126,7 +126,7 @@ export default function DescriptionCompany() {
           </div>
         </div>
       </div>
-      <AddBalanceModal value={value} setValue={setValue} show={addBalanceVisible} onHide={() => setAddBalanceVisible(false)} companyId={dataCompany?.id} />
+      <AddBalanceModal value={value} setValue={setValue} open={addBalanceVisible} onClose={() => setAddBalanceVisible(false)} companyId={dataCompany?.id} />
       <div className={classes.button}>
         <Button style={{ border: '1px solid red' }} size="small" onClick={() => deleteHandler(id)}>Удалить</Button>
       </div>

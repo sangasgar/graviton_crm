@@ -48,7 +48,13 @@ const useStyles = makeStyles({
 });
 
 export default function DescriptionLead() {
-  const [changeCompanyVisible, setChangeCompanyVisible] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
   const dispatch = useDispatch();
   const { id } = useParams();
   const dataLead = useSelector((store) => store.descriptionLead);
@@ -57,10 +63,10 @@ export default function DescriptionLead() {
     dispatch(deleteLeadThunk(idLead));
     navigate('/leads');
   };
-  const [value, setValue] = useState(false);
+  const [value, setValue] = useState('Выберите статус');
 
   useEffect(() => {
-    dispatch(getDescriptionLeadThunk(id));
+    setTimeout(() => dispatch(getDescriptionLeadThunk(id)), 100);
   }, [value]);
   const classes = useStyles();
 
@@ -96,9 +102,9 @@ export default function DescriptionLead() {
             {dataLead?.Status?.name}
           </div>
           <div className={classes.content}>
-            {dataLead?.Status?.name !== 'Активный' ? <Button variant="outlined" onClick={() => setChangeCompanyVisible(true)}>Изменить статус лида</Button> : <div />}
+            {dataLead?.Status?.name !== 'Активный' ? <Button variant="outlined" onClick={handleOpen}>Изменить статус лида</Button> : <div />}
           </div>
-          <ChangeStatusModal value={value} setValue={setValue} show={changeCompanyVisible} onHide={() => setChangeCompanyVisible(false)} idLead={id} />
+          <ChangeStatusModal value={value} setValue={setValue} open={open} onClose={handleClose} idLead={id} />
         </div>
         <div className={classes.button}>
           <Button style={{ border: '1px solid red' }} size="small" onClick={() => deleteHandler(id)}>Удалить</Button>

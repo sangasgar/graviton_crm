@@ -1,52 +1,71 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
 /* eslint-disable react/react-in-jsx-scope */
+import Modal from '@mui/material/Modal';
+import Button from '@mui/material/Button';
 import { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import Box from '@mui/material/Box';
+import FormControl from '@mui/material/FormControl';
 import updateStatusThunk from '../../redux/thunks/updateStatusThunk';
 
 export default function ChangeStatusModal({
-  value, setValue, show, onHide, idLead,
+  value, setValue, open, onClose, idLead,
 }) {
   const [status, setStatus] = useState('');
   const dispatch = useDispatch();
-
+  const handleChange = (event) => {
+    setStatus(event.target.value);
+  };
   const changeStatusHandler = (id, status_id) => {
     dispatch(updateStatusThunk(id, status_id));
     setValue(!value);
-    onHide();
+    onClose();
   };
-  const handleChange = (event) => {
-    setStatus(event.target.value);
+  const style = {
+    box: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 400,
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      boxShadow: 24,
+      p: 4,
+    },
+    select: {
+      width: '400px',
+      height: '40px',
+    },
   };
 
   return (
     <Modal
-      show={show}
-      onHide={onHide}
-      size="lg"
-      centered
+      open={open}
+      onClose={onClose}
+      aria-labelledby="modal-modal-title"
+      aria-describedby="modal-modal-description"
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Изменить статус лида
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body />
-      <Form style={{ margin: '0 30px' }}>
-        <Form.Select aria-label="Default select example" value={status} onChange={handleChange}>
-          <option>Выберите тип</option>
-          <option value={1}>Активный</option>
-          <option value={3}>В работе</option>
-          <option value={4}>Возврат</option>
-          <option value={5}>Неактивный</option>
-        </Form.Select>
-      </Form>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>Закрыть</Button>
+      <Box sx={style.box}>
+        <FormControl fullWidth>
+          <select
+            style={style.select}
+            value={status}
+            label={value}
+            onChange={handleChange}
+          >
+            <option style={style.select} value="">Выберите статус</option>
+            <option style={style.select} value={1}>Активный</option>
+            <option style={style.select} value={3}>В работе</option>
+            <option style={style.select} value={4}>Возврат</option>
+            <option style={style.select} value={5}>Не актуально</option>
+          </select>
+        </FormControl>
+        <Button variant="secondary" onClick={onClose}>Закрыть</Button>
         <Button variant="secondary" onClick={() => changeStatusHandler(idLead, status)}>Подтвердить</Button>
-      </Modal.Footer>
+      </Box>
     </Modal>
   );
 }
