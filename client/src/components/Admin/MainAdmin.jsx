@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+import Button from '@mui/material/Button';
 import CreateCompany from './modals/CreateCompany';
 import CreateLead from './modals/CreateLead';
 import UpdateUser from './modals/UpdateUser';
@@ -44,6 +44,10 @@ const useStyles = makeStyles({
     color: '#188A77',
     width: '200px',
   },
+  buttonMain: {
+    height: '50px',
+    width: '120px',
+  },
 });
 
 export default function MainAdmin() {
@@ -66,9 +70,9 @@ export default function MainAdmin() {
           <div className={classes.content}>
             <Button variant="secondary" className="mt-2" onClick={() => setAddCompanyVisible(true)}> Добавить компанию</Button>
           </div>
-          <CreateLead show={addLeadVisible} onHide={() => setAddLeadVisible(false)} />
-          <CreateCompany show={addCompanyVisible} onHide={() => setAddCompanyVisible(false)} />
-          <UpdateUser show={updateUser} onHide={() => setUpdateUser(false)} />
+          <CreateLead open={addLeadVisible} onClose={() => setAddLeadVisible(false)} />
+          <CreateCompany open={addCompanyVisible} onClose={() => setAddCompanyVisible(false)} />
+          <UpdateUser open={updateUser} onClose={() => setUpdateUser(false)} />
           <div className={classes.button}>
             <Link
               to="/"

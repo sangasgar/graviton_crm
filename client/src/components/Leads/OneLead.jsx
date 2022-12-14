@@ -47,7 +47,7 @@ export default function CustomizedTables({ row }) {
             </Button>
           )}
       </StyledTableCell>
-      <SendCompanyModal idLead={row?.id} show={sendCompanyVisible} onHide={() => setSendCompanyVisible(false)} />
+      <SendCompanyModal idLead={row?.id} open={sendCompanyVisible} onClose={() => setSendCompanyVisible(false)} />
     </StyledTableRow>
 
   );

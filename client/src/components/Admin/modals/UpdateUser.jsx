@@ -1,13 +1,17 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 /* eslint-disable camelcase */
 /* eslint-disable no-shadow */
 /* eslint-disable react/react-in-jsx-scope */
+import Modal from '@mui/material/Modal';
+import { Button } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import Box from '@mui/material/Box';
 import { useState } from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import updateUserThunk from '../../../redux/thunks/updateuserThunk';
 
-export default function UpdateUser({ show, onHide }) {
+export default function UpdateUser({ open, onClose }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -15,47 +19,78 @@ export default function UpdateUser({ show, onHide }) {
   const { id } = useSelector((store) => store.user);
   const updateUserHandler = (id, name, email, password) => {
     dispatch(updateUserThunk(id, name, email, password));
-    onHide();
+    onClose();
   };
-
+  const style = {
+    box: {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 400,
+      height: 300,
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      boxShadow: 24,
+      p: 4,
+    },
+    form: {
+      width: '400px',
+      height: '40px',
+    },
+    button: {
+      border: '1px solid black',
+      position: 'relative',
+      top: '100%',
+      left: '50%',
+      transform: 'translate(-50%, 0)',
+    },
+    select: {
+      width: '400px',
+      margin: '10px',
+      display: 'flex',
+      justifyContent: 'center',
+    },
+    p: {
+      margin: '0 auto',
+      fontWeight: 'bolder',
+    },
+  };
   return (
     <Modal
-      show={show}
-      onHide={onHide}
+      open={open}
+      onClose={onClose}
       size="lg"
       centered
     >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Изменить данные
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body />
-      <Form>
-        <Form.Control
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="mb-2 border border-secondary"
-          placeholder="Введите новое имя"
-        />
-
-        <Form.Control
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="mb-2 border border-secondary"
-          placeholder="Введите новый телефон"
-        />
-        <Form.Control
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="mb-2 border border-secondary"
-          placeholder="Введите новый пароль"
-        />
-      </Form>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>Закрыть</Button>
-        <Button variant="secondary" onClick={() => updateUserHandler(id, name, email, password)}>Добавить</Button>
-      </Modal.Footer>
+      <Box sx={style.box}>
+        <div style={style.select}><div style={style.p}>Добавить компанию</div></div>
+        <FormControl sx={style.form}>
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={style.select}
+            placeholder="Введите новое имя"
+            type="text"
+          />
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={style.select}
+            placeholder="Введите новый email"
+            type="text"
+          />
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={style.select}
+            placeholder="Введите новый пароль"
+            type="text"
+          />
+          <Button sx={style.button} onClick={onClose}>Закрыть</Button>
+          <Button sx={style.button} onClick={() => updateUserHandler(id, name, email, password)}>Подтвердить</Button>
+        </FormControl>
+      </Box>
     </Modal>
   );
 }

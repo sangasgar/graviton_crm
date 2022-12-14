@@ -1,20 +1,21 @@
-/* eslint-disable camelcase */
 import defaultHost from '../../default/defaultHost';
+import getTypeLeadAC from '../actions/getTypeLeadAC';
 
 const HOST = defaultHost.main_host;
-const addBalanceThunk = (company_id, payment_sum, comment) => async () => {
+const getTypeLeadThunk = () => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
-    const response = await fetch(`${HOST}/payments/add`, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    const response = await fetch(`${HOST}/lead-type`, {
+      method: 'GET', // *GET, POST, PUT, DELETE, etc.
       headers: {
         'Content-Type': 'application/json',
         authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ company_id, payment_sum, comment }),
     });
     const data = await response.json();
-    if (!data.createPaymentStatus) {
+    if (response.ok) {
+      dispatch(getTypeLeadAC(data));
+    } else {
       // eslint-disable-next-line no-alert
       alert('Что-то пошло не так!');
     }
@@ -24,4 +25,4 @@ const addBalanceThunk = (company_id, payment_sum, comment) => async () => {
   }
 };
 
-export default addBalanceThunk;
+export default getTypeLeadThunk;
