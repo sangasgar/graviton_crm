@@ -28,6 +28,8 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 export default function CustomizedTables({ row }) {
+  const create = row.createdAt?.slice(0, row.createdAt.length - 8).replace('T', ' ');
+  const update = row.updatedAt?.slice(0, row.createdAt.length - 8).replace('T', ' ');
   const [sendCompanyVisible, setSendCompanyVisible] = React.useState(false);
 
   return (
@@ -37,6 +39,8 @@ export default function CustomizedTables({ row }) {
       </StyledTableCell>
       <StyledTableCell align="right"><Link to={`/leads/${row.id}`}>{row.lead_name}</Link></StyledTableCell>
       <StyledTableCell align="right">{row.lead_phone}</StyledTableCell>
+      <StyledTableCell align="right">{create}</StyledTableCell>
+      <StyledTableCell align="right">{update}</StyledTableCell>
       <StyledTableCell align="right">{row?.comment}</StyledTableCell>
       <StyledTableCell align="right">{row.Status?.name}</StyledTableCell>
       <StyledTableCell align="right">

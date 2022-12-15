@@ -2,7 +2,7 @@ import getAllLeadsAC from '../actions/allLeadsAction';
 import defaultHost from '../../default/defaultHost';
 
 const HOST = defaultHost.main_host;
-const getAllLeadsThunk = (valueSort) => async (dispatch) => {
+const getAllLeadsThunk = (valueSort, sortCompany) => async (dispatch) => {
   try {
     const token = localStorage.getItem('token');
     const response = await fetch(`${HOST}/leads/all`, {
@@ -15,6 +15,9 @@ const getAllLeadsThunk = (valueSort) => async (dispatch) => {
     let data = await response.json();
     if (valueSort) {
       data = data.filter((lead) => lead.Status.id === valueSort);
+    }
+    if (sortCompany) {
+      data = data.filter((lead) => lead.Company.id === sortCompany);
     }
     if (response.ok) {
       dispatch(getAllLeadsAC(data));

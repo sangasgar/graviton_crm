@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/react-in-jsx-scope */
@@ -15,6 +16,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import OneLead from './OneLead';
 import getAllLeadsThunk from '../../redux/thunks/allLeadsThunk';
+import getAllCompanyThunk from '../../redux/thunks/getAllCompanyThunk';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -29,12 +31,20 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 export default function Leads() {
   const dispatch = useDispatch();
   const allLeads = useSelector((store) => store.allLeads);
+  const allCompanies = useSelector((store) => store.allCompany);
   const [vauleSort, setValueSort] = useState(false);
+  const [sortCompany, setSortCompany] = useState(false);
   useEffect(() => {
-    dispatch(getAllLeadsThunk(vauleSort));
-  }, [dispatch, vauleSort]);
+    dispatch(getAllLeadsThunk(vauleSort, sortCompany));
+  }, [dispatch, vauleSort, sortCompany]);
+  useEffect(() => {
+    dispatch(getAllCompanyThunk());
+  }, []);
   const handleChange = (event) => {
     setValueSort(event.target.value);
+  };
+  const handleChangeCompany = (event) => {
+    setSortCompany(event.target.value);
   };
 
   return (
@@ -45,6 +55,8 @@ export default function Leads() {
             <StyledTableCell style={{ backgroundColor: '#0dd6c9' }}>id</StyledTableCell>
             <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>Name</StyledTableCell>
             <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>Contact</StyledTableCell>
+            <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>Date create</StyledTableCell>
+            <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>Date update</StyledTableCell>
             <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>Comment</StyledTableCell>
             <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>
               Status
@@ -56,6 +68,7 @@ export default function Leads() {
                 label="status"
                 onChange={handleChange}
               >
+                <MenuItem value={false}>Все</MenuItem>
                 <MenuItem value={1}>Активный</MenuItem>
                 <MenuItem value={2}>Передан</MenuItem>
                 <MenuItem value={3}>В работе</MenuItem>
@@ -63,7 +76,20 @@ export default function Leads() {
                 <MenuItem value={5}>Неактивный</MenuItem>
               </Select>
             </StyledTableCell>
-            <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>Company</StyledTableCell>
+            <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>
+              Company
+              {' '}
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                value={sortCompany}
+                label="company"
+                onChange={handleChangeCompany}
+              >
+                <MenuItem value={false}>Все</MenuItem>
+                {allCompanies?.map((company) => <MenuItem value={company?.id}>{company?.name}</MenuItem>)}
+              </Select>
+            </StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
