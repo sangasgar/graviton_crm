@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import updateUserThunk from '../../../redux/thunks/updateuserThunk';
 
 export default function UpdateUser({ open, onClose }) {
+  const { user } = useSelector((store) => store);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -64,7 +65,10 @@ export default function UpdateUser({ open, onClose }) {
       centered
     >
       <Box sx={style.box}>
-        <div style={style.select}><div style={style.p}>Добавить компанию</div></div>
+        Данные текущей сессии:
+        {` ${user.name}`}
+        {` почта ${user.email}`}
+        <div style={style.select}><div style={style.p}>Изменить данные аккаунта</div></div>
         <FormControl sx={style.form}>
           <input
             value={name}
