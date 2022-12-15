@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   button: {
     position: 'absolute',
     bottom: '20%',
-    right: '50%',
+    right: '65%',
   },
   root: {
     background: '#188A77',
