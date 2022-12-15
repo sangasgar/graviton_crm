@@ -26,12 +26,12 @@ function App() {
         {user.name ? <Navbar /> : null}
         {!user.name ? <SignInSide /> : null}
         <Routes>
-          <Route path="/" element={!user.name ? <SignInSide /> : <Navigate replace to="/leads" />} />
-          <Route path="/leads" element={user.name ? <Leads /> : <Navigate replace to="/" />} />
-          <Route path="/company" element={user.name ? <Company /> : <Navigate replace to="/" />} />
-          <Route path="/leads/:id" element={user.name ? <DescriptionLead /> : <Navigate replace to="/" />} />
-          <Route path="/company/:id" element={user.name ? <DescriptionCompany /> : <Navigate replace to="/" />} />
-          <Route path="/lk" element={user.name ? <MainAdmin /> : <SignInSide />} />
+          <Route path="/singin" element={!user.name ? null : <Navigate replace to="/leads" />} />
+          <Route path="/leads" element={user.name ? <Leads /> : <Navigate replace to="/singin" />} />
+          <Route path="/company" element={user.name ? <Company /> : <Navigate replace to="/singin" />} />
+          <Route path="/leads/:id" element={user.name ? <DescriptionLead /> : <Navigate replace to="/singin" />} />
+          <Route path="/company/:id" element={user.name ? <DescriptionCompany /> : <Navigate replace to="/singin" />} />
+          <Route path="/lk" element={user.name ? <MainAdmin /> : <Navigate replace to="/singin" />} />
         </Routes>
       </Container>
     </div>

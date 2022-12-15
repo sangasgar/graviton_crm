@@ -39,7 +39,7 @@ export default function Company() {
             <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>Name</StyledTableCell>
             <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>Contact</StyledTableCell>
             <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>Email</StyledTableCell>
-            <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>Balance</StyledTableCell>
+            <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>Balance ($)</StyledTableCell>
             <StyledTableCell align="right" style={{ backgroundColor: '#0dd6c9' }}>Comment</StyledTableCell>
           </TableRow>
         </TableHead>

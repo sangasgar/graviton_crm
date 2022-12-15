@@ -63,7 +63,7 @@ export default function AddBalanceModal({
       centered
     >
       <Box sx={style.box}>
-        <div style={style.select}><div style={style.p}>Пополнить баланс</div></div>
+        <div style={style.select}><div style={style.p}>Пополнить баланс ($)</div></div>
         <FormControl sx={style.form}>
           <input
             value={balance}

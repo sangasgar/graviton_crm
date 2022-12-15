@@ -32,7 +32,7 @@ export default function OneCompany({ row }) {
       <StyledTableCell align="right"><Link to={`/company/${row.id}`}>{row.name}</Link></StyledTableCell>
       <StyledTableCell align="right">{row.phone}</StyledTableCell>
       <StyledTableCell align="right">{row.email}</StyledTableCell>
-      <StyledTableCell align="right">{row.balance}</StyledTableCell>
+      <StyledTableCell align="right">{`${row.balance}$`}</StyledTableCell>
       <StyledTableCell align="right">{row.comment}</StyledTableCell>
     </StyledTableRow>
   );
