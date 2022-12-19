@@ -109,6 +109,20 @@ router.patch('/:id/update-status', auth, async (req, res, next) => {
     return res.json({ updateCompanyBalance: false, resetLeadStatus: false });
   }
 });
+router.patch('/:id/update-comment', auth, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { comment } = req.body;
+    if (id && comment) {
+      const leads = await Leads.update({ comment }, { where: { id } });
+      const updateCommentStatus = leads[0] === 1;
+      return res.json({ updateCommentStatus });
+    }
+    return res.json({ updateCommentStatus: false });
+  } catch (error) {
+    return res.json({ updateCommentStatus: false });
+  }
+});
 router.patch('/lead-send', auth, async (req, res, next) => {
   try {
     const {
