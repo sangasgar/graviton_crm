@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import getDescriptionLeadThunk from '../../redux/thunks/getDescriptionLeadThunk';
 import deleteLeadThunk from '../../redux/thunks/deleteLeadThunk';
 import ChangeStatusModal from './ChangeStatusModal';
+import UpdateCommentModal from './UpdateCommentModal';
 
 const useStyles = makeStyles({
   container: {
@@ -49,6 +50,8 @@ const useStyles = makeStyles({
 
 export default function DescriptionLead() {
   const [open, setOpen] = useState(false);
+  const [openUpdateComment, setOpenUpdateComment] = useState(false);
+  const [trigger, setTrigger] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -67,7 +70,7 @@ export default function DescriptionLead() {
 
   useEffect(() => {
     setTimeout(() => dispatch(getDescriptionLeadThunk(id)), 100);
-  }, [value]);
+  }, [value, trigger]);
   const classes = useStyles();
 
   return (
@@ -89,6 +92,10 @@ export default function DescriptionLead() {
             {' '}
             {dataLead?.comment}
           </div>
+          <div className={classes.content}>
+            <Button variant="outlined" onClick={() => setOpenUpdateComment(true)}> Изменить комметарий </Button>
+            <UpdateCommentModal value={trigger} setValue={setTrigger} open={openUpdateComment} onClose={setOpenUpdateComment} idLead={id} />
+          </div>
         </div>
         <div className={classes.title}>
           <div className={classes.content}>
@@ -107,7 +114,7 @@ export default function DescriptionLead() {
           <ChangeStatusModal value={value} setValue={setValue} open={open} onClose={handleClose} idLead={id} />
         </div>
         <div className={classes.button}>
-          <Button style={{ border: '1px solid red' }} size="small" onClick={() => deleteHandler(id)}>Удалить</Button>
+          {dataLead?.Status.name === 'Не актуально' ? <Button style={{ border: '1px solid red' }} size="small" onClick={() => deleteHandler(id)}>Удалить</Button> : null}
         </div>
       </div>
     </div>
