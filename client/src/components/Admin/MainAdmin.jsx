@@ -9,6 +9,7 @@ import CreateLead from './modals/CreateLead';
 import UpdateUser from './modals/UpdateUser';
 import getTypeLeadThunk from '../../redux/thunks/getTypeLeadThunk';
 import AddTypeLead from './modals/AddTypeLead';
+import deleteTypeLeadThunk from '../../redux/thunks/deleteTypeLeadThunk';
 
 const useStyles = makeStyles({
   container: {
@@ -66,6 +67,10 @@ export default function MainAdmin() {
   const allTypeLead = useSelector((store) => store.allTypeLead);
   const [valueTypeLead, setValueTypeLead] = useState(false);
   const dispatch = useDispatch();
+  const deleteTypeHandler = (id) => {
+    dispatch(deleteTypeLeadThunk(id));
+    setValueTypeLead(!valueTypeLead);
+  };
   const clickHandler = () => {
     localStorage.removeItem('token');
     window.location.reload();
@@ -112,6 +117,7 @@ export default function MainAdmin() {
               <tr>
                 <th>Название</th>
                 <th>Цена</th>
+                <th>  </th>
               </tr>
             </thead>
             <tbody>
@@ -119,6 +125,7 @@ export default function MainAdmin() {
                 <tr>
                   <td>{type?.name}</td>
                   <td>{type?.price}</td>
+                  <td><Button variant="outlined" color="error" onClick={() => deleteTypeHandler(type?.id)}>удалить</Button></td>
                 </tr>
               ))}
             </tbody>

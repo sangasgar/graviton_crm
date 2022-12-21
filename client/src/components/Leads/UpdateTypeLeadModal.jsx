@@ -4,27 +4,22 @@
 /* eslint-disable react/react-in-jsx-scope */
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import FormControl from '@mui/material/FormControl';
-import getTypeLeadThunk from '../../redux/thunks/getTypeLeadThunk';
+import { useDispatch } from 'react-redux';
+import updateTypeLeadThunk from '../../redux/thunks/UpdateTypeLeadThunk';
 
 export default function UpdateTypeLeadModal({
-  value, setValue, open, onClose, idLead,
+  value, setValue, open, onClose, idLead, allTypeLead,
 }) {
-  const [type, setType] = useState('');
-  const allTypeLead = useSelector((store) => store.allTypeLead);
-  //   const dispatch = useDispatch();
+  const [type, setType] = useState('Выберите тип');
+  const dispatch = useDispatch();
   const handleChange = (event) => {
     setType(event.target.value);
   };
-  useEffect(() => {
-    getTypeLeadThunk();
-  }, []);
   const updateTypeHandler = (id, typeLead) => {
-    console.log(id, typeLead);
-    // dispatch(updateTypeLeadThunk(id, typeLead));
+    dispatch(updateTypeLeadThunk(id, typeLead));
     setValue(!value);
     onClose();
   };
@@ -45,7 +40,6 @@ export default function UpdateTypeLeadModal({
       height: '40px',
     },
   };
-
   return (
     <Modal
       open={open}
@@ -58,10 +52,10 @@ export default function UpdateTypeLeadModal({
           <select
             style={style.select}
             value={type}
-            label={value}
+            label={type}
             onChange={handleChange}
           >
-            { allTypeLead.map((lead) => <option style={style.select} value={lead.id}>{lead.name}</option>)}
+            { allTypeLead.map((lead) => <option style={style.select} value={lead.id}>{lead.name}</option>) }
           </select>
         </FormControl>
         <Button variant="secondary" onClick={onClose}>Закрыть</Button>

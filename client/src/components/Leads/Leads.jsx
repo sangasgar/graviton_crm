@@ -34,9 +34,10 @@ export default function Leads() {
   const allCompanies = useSelector((store) => store.allCompany);
   const [vauleSort, setValueSort] = useState(false);
   const [sortCompany, setSortCompany] = useState(false);
+  const [sendCompany, setSendCompany] = useState(false);
   useEffect(() => {
     dispatch(getAllLeadsThunk(vauleSort, sortCompany));
-  }, [dispatch, vauleSort, sortCompany]);
+  }, [dispatch, vauleSort, sortCompany, sendCompany]);
   useEffect(() => {
     dispatch(getAllCompanyThunk());
   }, []);
@@ -94,7 +95,7 @@ export default function Leads() {
         </TableHead>
         <TableBody>
           {allLeads.map((row, index) => (
-            <OneLead row={row} key={index * row?.id} />
+            <OneLead row={row} key={index * row?.id} value={sendCompany} setValue={setSendCompany} />
           ))}
         </TableBody>
       </Table>
