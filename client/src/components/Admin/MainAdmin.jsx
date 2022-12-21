@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,8 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import CreateCompany from './modals/CreateCompany';
 import CreateLead from './modals/CreateLead';
 import UpdateUser from './modals/UpdateUser';
-import AddtypeLead from './modals/AddTypeLead';
 import getTypeLeadThunk from '../../redux/thunks/getTypeLeadThunk';
+import AddTypeLead from './modals/AddTypeLead';
+import deleteTypeLeadThunk from '../../redux/thunks/deleteTypeLeadThunk';
 
 const useStyles = makeStyles({
   container: {
@@ -63,7 +65,12 @@ export default function MainAdmin() {
   const [updateUser, setUpdateUser] = useState(false);
   const [addTypeLead, setAddTypeLead] = useState(false);
   const allTypeLead = useSelector((store) => store.allTypeLead);
+  const [valueTypeLead, setValueTypeLead] = useState(false);
   const dispatch = useDispatch();
+  const deleteTypeHandler = (id) => {
+    dispatch(deleteTypeLeadThunk(id));
+    setValueTypeLead(!valueTypeLead);
+  };
   const clickHandler = () => {
     localStorage.removeItem('token');
     window.location.reload();
@@ -72,7 +79,7 @@ export default function MainAdmin() {
 
   useEffect(() => {
     dispatch(getTypeLeadThunk());
-  }, []);
+  }, [valueTypeLead]);
   return (
     <div className={classes.root}>
       <div className={classes.container}>
@@ -90,7 +97,7 @@ export default function MainAdmin() {
           <CreateCompany open={addCompanyVisible} onClose={() => setAddCompanyVisible(false)} />
           <UpdateUser open={updateUser} onClose={() => setUpdateUser(false)} />
           <div className={classes.button}>
-            <AddtypeLead open={addTypeLead} onClose={() => setAddTypeLead(false)} />
+            <AddTypeLead valueTypeLead={valueTypeLead} setValue={setValueTypeLead} open={addTypeLead} onClose={() => setAddTypeLead(false)} />
             <Link
               to="/"
               style={{
@@ -108,8 +115,9 @@ export default function MainAdmin() {
           <table className={classes.table}>
             <thead>
               <tr>
-                <th>Цена</th>
                 <th>Название</th>
+                <th>Цена</th>
+                <th>  </th>
               </tr>
             </thead>
             <tbody>
@@ -117,6 +125,7 @@ export default function MainAdmin() {
                 <tr>
                   <td>{type?.name}</td>
                   <td>{type?.price}</td>
+                  <td><Button variant="outlined" color="error" onClick={() => deleteTypeHandler(type?.id)}>удалить</Button></td>
                 </tr>
               ))}
             </tbody>

@@ -27,7 +27,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   },
 }));
 
-export default function CustomizedTables({ row }) {
+export default function CustomizedTables({ row, value, setValue }) {
   const create = row.createdAt?.slice(0, row.createdAt.length - 8).replace('T', ' ');
   const update = row.updatedAt?.slice(0, row.createdAt.length - 8).replace('T', ' ');
   const [sendCompanyVisible, setSendCompanyVisible] = React.useState(false);
@@ -51,7 +51,7 @@ export default function CustomizedTables({ row }) {
             </Button>
           )}
       </StyledTableCell>
-      <SendCompanyModal idLead={row?.id} open={sendCompanyVisible} onClose={() => setSendCompanyVisible(false)} />
+      <SendCompanyModal idLead={row?.id} open={sendCompanyVisible} onClose={() => setSendCompanyVisible(false)} value={value} setValue={setValue} />
     </StyledTableRow>
 
   );

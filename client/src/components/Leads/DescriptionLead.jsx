@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 /* eslint-disable max-len */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,6 +9,8 @@ import getDescriptionLeadThunk from '../../redux/thunks/getDescriptionLeadThunk'
 import deleteLeadThunk from '../../redux/thunks/deleteLeadThunk';
 import ChangeStatusModal from './ChangeStatusModal';
 import UpdateCommentModal from './UpdateCommentModal';
+import UpdateTypeLeadModal from './UpdateTypeLeadModal';
+import getTypeLeadThunk from '../../redux/thunks/getTypeLeadThunk';
 
 const useStyles = makeStyles({
   container: {
@@ -52,11 +55,15 @@ export default function DescriptionLead() {
   const [open, setOpen] = useState(false);
   const [openUpdateComment, setOpenUpdateComment] = useState(false);
   const [trigger, setTrigger] = useState(false);
+  const [updateTypeVisible, setUpdateTypeVisible] = useState(false);
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+  const UpdateTypeHandler = () => {
+    setUpdateTypeVisible(true);
   };
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -67,12 +74,16 @@ export default function DescriptionLead() {
     navigate('/leads');
   };
   const [value, setValue] = useState('Выберите статус');
+  const [value1, setValue1] = useState(false);
+  const allTypeLead = useSelector((store) => store.allTypeLead);
 
   useEffect(() => {
     setTimeout(() => dispatch(getDescriptionLeadThunk(id)), 100);
-  }, [value, trigger]);
+  }, [value, trigger, value1]);
   const classes = useStyles();
-
+  useEffect(() => {
+    dispatch(getTypeLeadThunk());
+  }, []);
   return (
     <div className={classes.root}>
       <div className={classes.container}>
@@ -111,6 +122,10 @@ export default function DescriptionLead() {
           <div className={classes.content}>
             {dataLead?.Status?.name !== 'Активный' ? <Button variant="outlined" onClick={handleOpen}>Изменить статус лида</Button> : <div />}
           </div>
+          <div className={classes.content}>
+          {dataLead?.Status?.name === 'Активный' ? <Button variant="outlined" onClick={UpdateTypeHandler}>Изменить тип лида</Button> : null}
+          </div>
+          <UpdateTypeLeadModal value={value1} setValue={setValue1} open={updateTypeVisible} onClose={() => setUpdateTypeVisible(false)} idLead={id} allTypeLead={allTypeLead} />
           <ChangeStatusModal value={value} setValue={setValue} open={open} onClose={handleClose} idLead={id} />
         </div>
         <div className={classes.button}>

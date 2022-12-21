@@ -12,7 +12,9 @@ import { Button } from '@mui/material';
 import getAllCompanyThunk from '../../redux/thunks/getAllCompanyThunk';
 import sendLeadThunk from '../../redux/thunks/sendLeadThunk';
 
-export default function SendCompanyModal({ idLead, open, onClose }) {
+export default function SendCompanyModal({
+  idLead, open, onClose, value, setValue,
+}) {
   const [company, setCompany] = useState('');
   const dispatch = useDispatch();
   const allCompany = useSelector((store) => store.allCompany);
@@ -25,7 +27,7 @@ export default function SendCompanyModal({ idLead, open, onClose }) {
   const addLeadSendHandler = (idLeads, comp) => {
     dispatch(sendLeadThunk(idLeads, comp));
     onClose();
-    window.location.reload();
+    setValue(!value);
   };
   const style = {
     box: {
