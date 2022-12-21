@@ -9,13 +9,16 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import addTypeLeadThunk from '../../../redux/thunks/addTypeLeadThunk';
 
-export default function AddtypeLead({ open, onClose }) {
+export default function AddTypeLead({
+  valueTypeLead, setValue, open, onClose,
+}) {
   const [nameTypeLead, setNameTypeLead] = useState('');
   const [price, setPrice] = useState('');
   const dispatch = useDispatch();
 
   const addTypeLeadHandler = (name, priceLead) => {
     dispatch(addTypeLeadThunk(name, priceLead));
+    setValue(!valueTypeLead);
     onClose();
   };
   const style = {
