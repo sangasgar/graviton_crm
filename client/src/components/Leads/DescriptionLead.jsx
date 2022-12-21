@@ -124,7 +124,7 @@ export default function DescriptionLead() {
           <ChangeStatusModal value={value} setValue={setValue} open={open} onClose={handleClose} idLead={id} />
         </div>
         <div className={classes.button}>
-          {dataLead?.Status?.name === 'Не актуально' ? <Button style={{ border: '1px solid red' }} size="small" onClick={() => deleteHandler(id)}>Удалить</Button> : null}
+          {dataLead?.Status?.name !== 'Передан' ? <Button style={{ border: '1px solid red' }} size="small" onClick={() => deleteHandler(id)}>Удалить</Button> : null}
         </div>
       </div>
     </div>

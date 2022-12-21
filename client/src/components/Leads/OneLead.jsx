@@ -41,7 +41,7 @@ export default function CustomizedTables({ row }) {
       <StyledTableCell align="right">{row.lead_phone}</StyledTableCell>
       <StyledTableCell align="right">{create}</StyledTableCell>
       <StyledTableCell align="right">{update}</StyledTableCell>
-      <StyledTableCell align="right">{row?.comment}</StyledTableCell>
+      <StyledTableCell align="right"><Link to={`/leads/${row.id}`}>{row?.comment}</Link></StyledTableCell>
       <StyledTableCell align="right">{row.Status?.name}</StyledTableCell>
       <StyledTableCell align="right">
         {row.Status.name === 'Активный' ? (<Button color="success" variant="contained" onClick={() => setSendCompanyVisible(true)}>Передать в компанию</Button>)

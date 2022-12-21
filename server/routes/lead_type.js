@@ -1,5 +1,8 @@
+/* eslint-disable max-len */
 const express = require('express');
+const { Leads } = require('../db/models');
 const { Leads_type } = require('../db/models');
+const { Companies } = require('../db/models');
 
 const router = express.Router();
 const auth = require('../middleware/auth');
@@ -34,6 +37,22 @@ router.route('/')
       return res.json({ createLeadTypeStatus: false });
     } catch (error) {
       return res.json({ createLeadTypeStatus: false });
+    }
+  })
+  .delete(auth, async (req, res, next) => {
+    try {
+      const {
+        id,
+      } = req.body;
+      const leadFind = JSON.parse(JSON.stringify(await Leads_type.findOne({ where: { id }, include: [Leads] })));
+      if (id && leadFind.Leads.length <= 0) {
+        const leadTypeDelete = await Leads_type.destroy({ where: { id } });
+        const leadTypeDeleteStatus = leadTypeDelete === 1;
+        return res.json({ leadTypeDeleteStatus });
+      }
+      return res.json({ leadTypeDeleteStatus: false });
+    } catch (error) {
+      return res.json({ leadTypeDeleteStatus: false });
     }
   });
 module.exports = router;
