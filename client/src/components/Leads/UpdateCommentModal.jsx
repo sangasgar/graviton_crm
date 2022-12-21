@@ -73,7 +73,7 @@ export default function UpdateCommentModal({
             placeholder="Введите комментарий"
             type="text"
           />
-          <Button sx={style.button} onClick={onClose}>Закрыть</Button>
+          <Button sx={style.button} onClick={() => onClose()}>Закрыть</Button>
           <Button sx={style.button} onClick={() => updateCommentHandler(idLead, comment)}>Изменить</Button>
         </FormControl>
       </Box>
