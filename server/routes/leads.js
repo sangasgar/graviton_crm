@@ -109,6 +109,26 @@ router.patch('/:id/update-status', auth, async (req, res, next) => {
     return res.json({ updateCompanyBalance: false, resetLeadStatus: false });
   }
 });
+
+router.patch('/:id/update-type', auth, async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { lead_type_id } = req.body;
+    if (id && lead_type_id) {
+      const leadFind = JSON.parse(JSON.stringify(await Leads.findOne({ where: { id }, include: [Leads_type, Companies] })));
+      if (leadFind.status_id === 1 && leadFind.company_id === null) {
+        const leads = await Leads.update({ lead_type_id }, { where: { id } });
+        const changeLeadType = leads[0] === 1;
+        return res.json({ changeLeadType });
+      }
+      return res.json({ changeLeadType: false });
+    }
+    return res.json({ changeLeadType: false });
+  } catch (error) {
+    return res.json({ changeLeadType: false });
+  }
+});
+
 router.patch('/:id/update-comment', auth, async (req, res, next) => {
   try {
     const { id } = req.params;
