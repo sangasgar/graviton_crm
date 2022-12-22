@@ -56,6 +56,9 @@ export default function DescriptionLead() {
   const [openUpdateComment, setOpenUpdateComment] = useState(false);
   const [trigger, setTrigger] = useState(false);
   const [updateTypeVisible, setUpdateTypeVisible] = useState(false);
+  const [value, setValue] = useState('Выберите статус');
+  const [value1, setValue1] = useState(false);
+  const allTypeLead = useSelector((store) => store.allTypeLead);
   const handleOpen = () => {
     setOpen(true);
   };
@@ -73,9 +76,6 @@ export default function DescriptionLead() {
     dispatch(deleteLeadThunk(idLead));
     navigate('/leads');
   };
-  const [value, setValue] = useState('Выберите статус');
-  const [value1, setValue1] = useState(false);
-  const allTypeLead = useSelector((store) => store.allTypeLead);
 
   useEffect(() => {
     setTimeout(() => dispatch(getDescriptionLeadThunk(id)), 100);

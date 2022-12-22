@@ -17,7 +17,7 @@ const getAllLeadsThunk = (valueSort, sortCompany) => async (dispatch) => {
       data = data.filter((lead) => lead.Status.id === valueSort);
     }
     if (sortCompany) {
-      data = data.filter((lead) => lead.Company.id === sortCompany);
+      data = data.filter((lead) => lead.Company !== null && lead?.Company.id === sortCompany);
     }
     if (response.ok) {
       dispatch(getAllLeadsAC(data));

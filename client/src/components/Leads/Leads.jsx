@@ -35,9 +35,11 @@ export default function Leads() {
   const [vauleSort, setValueSort] = useState(false);
   const [sortCompany, setSortCompany] = useState(false);
   const [sendCompany, setSendCompany] = useState(false);
+  const [valueSortCompany, setValueSortCompany] = useState(false);
   useEffect(() => {
-    dispatch(getAllLeadsThunk(vauleSort, sortCompany));
-  }, [dispatch, vauleSort, sortCompany, sendCompany]);
+    setTimeout(() => dispatch(getAllLeadsThunk(vauleSort, sortCompany)), 100);
+  }, [dispatch, vauleSort, sortCompany, sendCompany, valueSortCompany]);
+
   useEffect(() => {
     dispatch(getAllCompanyThunk());
   }, []);
@@ -45,6 +47,7 @@ export default function Leads() {
     setValueSort(event.target.value);
   };
   const handleChangeCompany = (event) => {
+    setValueSortCompany(!valueSortCompany);
     setSortCompany(event.target.value);
   };
 
