@@ -26,8 +26,8 @@ export default function SendCompanyModal({
   };
   const addLeadSendHandler = (idLeads, comp) => {
     dispatch(sendLeadThunk(idLeads, comp));
-    onClose();
     setValue(!value);
+    onClose();
   };
   const style = {
     box: {
